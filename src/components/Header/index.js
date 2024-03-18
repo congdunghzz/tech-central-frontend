@@ -1,7 +1,7 @@
 function Header () {
 
     return (
-        <div className="container header border-bottom" style={{display: "flex"}}>
+        <div className="d-flex container header border-bottom" >
             <div className="col-1 logo d-flex justify-content-center align-items-center">
                 <p className="font-weight-bold" style={{fontWeight:"700", fontSize:"1.8rem"}}>Tech Central</p>
             </div>
@@ -26,7 +26,7 @@ function Header () {
                 </header>
             </div>
             <div className="col-1 logo d-flex justify-content-center align-items-center">
-                <button type="button" className="btn btn-outline-primary me-2">Cart</button>
+                <button type="button" className="btn btn-outline-danger me-2">Cart</button>
             </div>
         </div>
     )
