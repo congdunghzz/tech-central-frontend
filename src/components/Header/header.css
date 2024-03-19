@@ -1,7 +1,12 @@
 
 .header-container{
     top: 0;
+    left: 0;
+    z-index: 500;
     justify-content: center;
     padding-top: 20px;
     align-items: center;
+}
+.placeholder{
+    height: 80px;
 }
