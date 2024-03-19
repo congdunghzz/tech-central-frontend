@@ -2,7 +2,7 @@ import "./features.css"
 
 function Features (){
     return (
-        <div className="features container my-4">
+        <div className="features container-fluid my-4 px-3">
             <div className="row d-flex">
 
                 <div className="col-lg-3 col-md-6 my-2">

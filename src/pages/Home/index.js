@@ -1,12 +1,14 @@
 import Header from "../../components/Header";
-import Banner from "../../components/Banner";
+import PriceSection from "../../components/PriceSection";
 import Features from "../../components/Features";
 import Footer from "../../components/Footer";
+import ProductList from "../../components/ProductList";
 function Home () {
     return (
         <>
             <Header/>
-            <Banner/>
+            <PriceSection/>
+            <ProductList/>
             <Features/>
             <Footer/>
         </>
