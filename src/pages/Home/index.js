@@ -11,9 +11,10 @@ function Home () {
             <Header/>
             <PriceSection/>
             <Categories/>
+            <Features/>
+
             <ProductList title = "Trending Products"/>
             <Banner/>
-            <Features/>
             <ProductList title = "New Arrivals"/>
             <Footer/>
         </>

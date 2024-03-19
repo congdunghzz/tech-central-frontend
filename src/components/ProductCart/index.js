@@ -1,19 +1,22 @@
 import "./ProductCart.css"
+import { Link } from "react-router-dom";
 
 
 function ProductCart (){
     return (
-        <div className="col-lg-3 col-md-6">
+        <div className=" col-lg-3 col-md-6">
                     <div className="border border-secondary m-2 mb-2 border-opacity-25">
                         <div className="w-100">
-                            <img className="w-100 d-inline-block" src="https://cdn.dummyjson.com/product-images/6/thumbnail.png" alt="Product Image"></img>                     
+                            <Link to={"/product/productId"}>
+                                <img className="w-100 d-inline-block" src="https://cdn.dummyjson.com/product-images/9/thumbnail.jpg" alt="Product Image"></img>                     
+                            </Link>
                         </div>
                         <div className="product-content">
 
                         </div>
                         <div className="px-4 pt-3">
                             <p className="my-0 fw-light">Laptop</p>
-                            <a className="product-name text-dark fs-5 text" href="#">MacBook Pro</a>
+                            <Link className="product-name text-dark fs-5 text" to="/product/productId">MacBook Pro</Link>
                         </div>
                         <div className="px-4 text-warning">
                             <svg stroke="currentColor" fill="currentColor" 

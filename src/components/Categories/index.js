@@ -4,7 +4,7 @@ function Categories (){
     return (
         <div className="categories">
 
-            <div className=" container-fruild d-flex flex-wrap align-items-center justify-content-center  py-3 my-5 ">   
+            <div className=" d-flex flex-wrap align-items-center justify-content-center  py-3 my-5 ">   
                         <ul className=" nav  mb-2 justify-content-center mb-md-0">
                             <li className="mx-3 fw-bold"><a href="#" className="nav-link px-2 text-secondary">All Products</a></li>
                             <li className="mx-3 fw-bold"><a href="#" className="nav-link px-2 text-secondary">Smart Phone</a></li>
