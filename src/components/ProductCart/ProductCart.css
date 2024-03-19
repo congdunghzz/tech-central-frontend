@@ -23,3 +23,12 @@
     --bs-gradient: none;
     
 }
+.custom-btn-pink {
+    --bs-btn-color: #fff;
+    background-color: rgb(236 72 153);
+
+    
+    --bs-btn-hover-color: #fff;
+
+    
+}
