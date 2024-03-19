@@ -11,7 +11,7 @@ function PriceSection () {
                             src='https://shopify-xrh7.onrender.com/hero.png' className=' h-100 p-0' style={{backgroundImage: "#fff"}}></img>
                     </div>
 
-                    <div className='col-lg-6 align-items-center d-flex'>
+                    <div className='col-lg-6 align-items-center d-flex justify-content-center'>
                         <div className='banner-content align-items-center w-75'>
                             <h2 className='mb-4'>Latest product line of Apple 2024</h2>
                             <h4 className='mb-4'>Exclusive offer <spam className = "text-danger">-10%</spam> off this week</h4>
