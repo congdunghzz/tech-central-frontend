@@ -1,4 +1,5 @@
 
+import "./ButtonAddToCart.css"
 
 function ButtonAddToCart({name}){
     return (
