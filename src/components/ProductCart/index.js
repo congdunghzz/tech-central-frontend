@@ -10,7 +10,7 @@ function ProductCart (){
                     <div className="border border-secondary m-2 mb-2 border-opacity-25">
                         <div className="w-100">
                             <Link to={"/product/productId"}>
-                                <img className="w-100 d-inline-block" src="https://cdn.dummyjson.com/product-images/9/thumbnail.jpg" alt="Product Image"></img>                     
+                                <img className="mw-100 d-inline-block" src="https://anphat.com.vn/media/lib/05-04-2023/mbpro.jpg" alt="Product Image"></img>                     
                             </Link>
                         </div>
                         <div className="product-content">

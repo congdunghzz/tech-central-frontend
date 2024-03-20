@@ -1,15 +1,18 @@
-import "./ProductInfo.css"
+import { useState } from "react";
 
+import "./ProductInfo.css"
 import ButtonAddToCart from "../ButtonAddToCart";
 import RatingStar from "../RatingStar";
+import ProductDetail from "../ProductDetail";
 
 function ProductInfo(){
-    return (
+    const [showDetail, setShowDetail] = useState(false);
+        return (
         <>
             <div className="container-fluid pt-5">
                 <div className="row">
                     <div className="d-flex col-lg-6 col-md-12 align-items-center justify-content-center">
-                        <img className="mw-100" src="https://cdn.dummyjson.com/product-images/9/thumbnail.jpg" alt="Product Image" />
+                        <img className="mw-100 mb-4" src="https://cdn.techzones.vn/Data/Sites/1/News/4358/techzones-tim-hieu-nhung-diem-noi-bat-cua-apple-macbook-pro-14.png" alt="Product Image" />
                     </div>
 
                     <div className="info col-lg-6 col-md-12">
@@ -32,11 +35,16 @@ function ProductInfo(){
                                 </tr>
                             </tbody>
                         </table>
-                        <div className="mt-5 d-flex">
+                        <div className="mt-5 d-flex pb-5">
                             <ButtonAddToCart className="mt-4" name={"ADD TO CART"}/> 
                             <ButtonAddToCart className="mt-4" name={"BUY NOW"}/> 
                             <ButtonAddToCart className="mt-4" name={"LIKE"}/> 
                         </div>
+
+                        { showDetail && <ProductDetail />}
+                        <button type="button" class="btn btn-outline-info text-dark" onClick={() => {setShowDetail(!showDetail)}}>
+                            { showDetail ? "Shortcut" : "Show more"}
+                        </button>
                     </div>
 
                 </div>
