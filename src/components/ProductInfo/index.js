@@ -42,7 +42,7 @@ function ProductInfo(){
                         </div>
 
                         { showDetail && <ProductDetail />}
-                        <button type="button" class="btn btn-outline-info text-dark" onClick={() => {setShowDetail(!showDetail)}}>
+                        <button type="button" class="btn btn-secondary" onClick={() => {setShowDetail(!showDetail)}}>
                             { showDetail ? "Shortcut" : "Show more"}
                         </button>
                     </div>

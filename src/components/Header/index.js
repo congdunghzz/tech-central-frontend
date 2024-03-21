@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 
 function Header () {
 
+    const appearInRoot = async() => {
+        
+    };
+
     return (
         <>
             <div className="d-flex container-fluid header-container border-bottom position-fixed bg-light shadow  mb-5 bg-white rounded" >
@@ -20,7 +24,11 @@ function Header () {
                     
                 </div>
                 <div className="h-100 mb-auto ms-auto logo d-flex justify-content-center align-items-center">
-                    <button type="button" className="btn btn-outline-danger me-2">Cart</button>
+                    <Link to="/cart">
+                        <button type="button" className="btn btn-outline-danger me-2">
+                            Cart
+                        </button>
+                    </Link>
                 </div>
             </div>
             <div className="placeholder"></div>

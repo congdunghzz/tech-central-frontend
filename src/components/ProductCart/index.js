@@ -6,12 +6,13 @@ import ButtonAddToCart from "../ButtonAddToCart";
 
 function ProductCart (){
     return (
-        <div className=" col-lg-3 col-md-6">
+        <div className=" col-lg-3 col-md-6" id="head">
                     <div className="border border-secondary m-2 mb-2 border-opacity-25">
                         <div className="w-100">
                             <Link to={"/product/productId"}>
                                 <img className="mw-100 d-inline-block" src="https://anphat.com.vn/media/lib/05-04-2023/mbpro.jpg" alt="Product Image"></img>                     
                             </Link>
+                            
                         </div>
                         <div className="product-content">
 
