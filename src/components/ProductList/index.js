@@ -12,7 +12,7 @@ function ProductList({title}) {
 
             <div className="row mt-3">
                 
-                {products.map(product => (<ProductCart/>))}
+                {products.map((product, index) => (<ProductCart key={index}/>))}
                
             </div>
         </div>

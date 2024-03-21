@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import ProductList from "../../components/ProductList";
 
 function SingleProduct(){
+    
     return (
         <>
             <Header/>

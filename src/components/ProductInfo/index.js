@@ -19,18 +19,18 @@ function ProductInfo(){
                         <h3>MacBook Pro</h3>
                         <RatingStar/>
                         <h4 className="fst-italic text-primary me-2 pt-3 ">$1500</h4>
-                        <table class="mt-2">
+                        <table className="mt-2">
                             <tbody>
                                 <tr className="">
-                                    <td class=" fw-bold pe-3 fs-6">Brand</td>
+                                    <td className=" fw-bold pe-3 fs-6">Brand</td>
                                     <td>Apple</td>
                                 </tr>
                                 <tr className="">
-                                    <td class=" fw-bold pe-3 fs-6">Category </td>
+                                    <td className=" fw-bold pe-3 fs-6">Category </td>
                                     <td>laptops</td>
                                 </tr>
                                 <tr className="">
-                                    <td class=" fw-bold pe-3 fs-6">Stock</td>
+                                    <td className=" fw-bold pe-3 fs-6">Stock</td>
                                     <td>83</td>
                                 </tr>
                             </tbody>
@@ -42,7 +42,7 @@ function ProductInfo(){
                         </div>
 
                         { showDetail && <ProductDetail />}
-                        <button type="button" class="btn btn-secondary" onClick={() => {setShowDetail(!showDetail)}}>
+                        <button type="button" className="btn btn-secondary" onClick={() => {setShowDetail(!showDetail)}}>
                             { showDetail ? "Shortcut" : "Show more"}
                         </button>
                     </div>

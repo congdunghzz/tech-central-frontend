@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 function Header () {
 
-    const appearInRoot = async() => {
+    // const appearInRoot = async() => {
         
-    };
+    // };
 
     return (
         <>
@@ -17,8 +17,8 @@ function Header () {
                 </div>
                 <div className="w-50 align-items-center">
                     <div style={{height :"60px", display:"flex", justifyContent:"center"}}>
-                        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style={{ width:"50%"}}>
-                            <input type="search" class="form-control form-control-dark " placeholder="Search..." aria-label="Search"/>
+                        <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style={{ width:"50%"}}>
+                            <input type="search" className="form-control form-control-dark " placeholder="Search..." aria-label="Search"/>
                         </form>
                     </div>
                     

@@ -2,7 +2,7 @@
 function ProductDetail(){
     return (
         <div className="product-detail my-5">
-            <table class="table table-sm table-striped w-75">
+            <table className="table table-sm table-striped w-75">
                 <tbody>
                     <tr>
                         <th scope="row"></th>

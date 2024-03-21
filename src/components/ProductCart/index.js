@@ -3,13 +3,16 @@ import RatingStar from "../RatingStar";
 import { Link } from "react-router-dom";
 import ButtonAddToCart from "../ButtonAddToCart";
 
+function ProductCart ( key ) {
+    const onLinkClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
 
-function ProductCart (){
     return (
-        <div className=" col-lg-3 col-md-6" id="head">
+        <div key={key} className=" col-lg-3 col-md-6" id="head">
                     <div className="border border-secondary m-2 mb-2 border-opacity-25">
                         <div className="w-100">
-                            <Link to={"/product/productId"}>
+                            <Link to={"/product/productId"} onClick={onLinkClick}>
                                 <img className="mw-100 d-inline-block" src="https://anphat.com.vn/media/lib/05-04-2023/mbpro.jpg" alt="Product Image"></img>                     
                             </Link>
                             
@@ -19,7 +22,7 @@ function ProductCart (){
                         </div>
                         <div className="px-4 pt-3">
                             <p className="my-0 fw-light">Laptop</p>
-                            <Link className="product-name text-dark fs-5 text" to="/product/productId">MacBook Pro</Link>
+                            <Link className="product-name text-dark fs-5 text" to="/product/productId" onClick={onLinkClick}>MacBook Pro</Link>
                             <RatingStar className="px-4"></RatingStar>
 
                         </div>
