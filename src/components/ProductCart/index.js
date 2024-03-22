@@ -9,7 +9,7 @@ function ProductCart ( key ) {
     }
 
     return (
-        <div key={key} className=" col-xl-3 col-lg-4 col-md-6 col-sm-6" id="head">
+        <div key={key} className="col-xxl-3  col-xl-4 col-lg-4 col-md-6 col-sm-6" id="head">
                     <div className="border border-secondary m-2 mb-2 border-opacity-25">
                         <div className="w-100">
                             <Link to={"/product/productId"} onClick={onLinkClick}>

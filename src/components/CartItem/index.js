@@ -23,9 +23,11 @@ function CartItem (){
         <>
             <div className="item-row row align-items-center">
 
-                <div className="basic-info col-3 d-flex">
-                    <img className="h-100 " src="https://anphat.com.vn/media/lib/05-04-2023/mbpro.jpg"></img>
-                    <div className="mx-3">
+                <div className="basic-info col-3   d-flex">
+                    <Link to ="/product/productId/" className="text-decoration-none text-dark">
+                        <img className="mh-100 " src="https://anphat.com.vn/media/lib/05-04-2023/mbpro.jpg"></img>
+                    </Link>
+                    <div className="ms-3">
                         <Link to ="/product/productId/" className="text-decoration-none text-dark">
                             <h6 className="">MacBook Pro</h6>
                         </Link>
@@ -33,16 +35,17 @@ function CartItem (){
                     </div>
                 </div>
                 
-                <div className="d-flex col-3 align-items-center justify-content-center">
+                <div className="d-flex col-3   align-items-center justify-content-center">
                         <button className="btn btn-light border-dark" onClick={() => handleIncrement("MINUS")}>-</button>
                         <button className="btn btn-light border-dark">{amount}</button>
                         <button className="btn btn-light border-dark" onClick={() => handleIncrement("PLUS")}>+</button>
 
                 </div>
+                
 
-                <div className="total-cost col-3"><span>{"$" + productPrice*amount}</span></div>
+                <div className="d-flex total-cost col-3   justify-content-center"><span>{"$" + productPrice*amount}</span></div>
 
-                <div className=" col-3">
+                <div className="d-flex col-3   justify-content-center">
                     <svg stroke="currentColor" fill="currentColor" 
                             strokeWidth="0" viewBox="0 0 24 24" 
                             className=" delete-btn text-danger fs-4"
