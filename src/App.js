@@ -4,7 +4,7 @@ import './App.css';
 import Home from "./pages/Home";
 import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';
-import CheckOut from './pages/CheckOutPage/CheckOut';
+import Checkout from './pages/CheckoutPage';
 function App() {
   return (
     <>
@@ -13,7 +13,7 @@ function App() {
           <Route path = "/home" element = {<Home />} />
           <Route path="/product/productID" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<CheckOut />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
 
     </>
