@@ -11,11 +11,11 @@ function ProductInfo(){
         <>
             <div className="container-fluid pt-5">
                 <div className="row">
-                    <div className="d-flex col-lg-6 col-md-12 align-items-center justify-content-center">
+                    <div className="d-flex col-lg-6 col-md-6 align-items-center justify-content-center">
                         <img className="mw-100 mb-4" src="https://cdn.techzones.vn/Data/Sites/1/News/4358/techzones-tim-hieu-nhung-diem-noi-bat-cua-apple-macbook-pro-14.png" alt="Product Image" />
                     </div>
 
-                    <div className="info col-lg-6 col-md-12">
+                    <div className="info col-lg-6 col-md-6">
                         <h3>MacBook Pro</h3>
                         <RatingStar/>
                         <h4 className="fst-italic text-primary me-2 pt-3 ">$1500</h4>

@@ -6,7 +6,8 @@ function Cart (){
     return (
         <>
             <Header/>
-            <div className="container min-vh-75">
+            <div className="container min-vh-75 py-4">
+                <CartItem/>     
                 <CartItem/>     
             </div>
             <Footer/>

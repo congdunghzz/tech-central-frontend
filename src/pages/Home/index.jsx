@@ -8,17 +8,7 @@ import Banner from "../../components/Banner";
 import Categories from "../../components/Categories";
 
 function Home () {
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await fetch("https://jsonplaceholder.typicode.com/albums");
-            const data = await res.json();
-            console.log(data);
-        }
-        // fetchData();
-        
-        console.log("Logged")
-    }, [])
+
 
     console.log("first");
     return (
@@ -27,9 +17,9 @@ function Home () {
             <PriceSection/>
             <Categories/>
             <Features/>
-            <ProductList title = "Trending Products"/>
+            <ProductList title="Trending Products"/>
             <Banner/>
-            {/* <ProductList title = "New Arrivals"/>*/}
+            <ProductList title = "New Arrivals"/>
             <Footer/>
         </>
         
