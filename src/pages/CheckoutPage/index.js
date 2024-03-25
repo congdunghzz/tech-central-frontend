@@ -23,9 +23,9 @@ function CheckOut(){
         ward_type: ""
     }
 
-    const [provinces, setProvinces] = useState([]);
-    const [districts, setDistricts] = useState([]);
-    const [wards, setWards] = useState([]);
+    const [provinces, setProvinces] = useState([defaultProvince]);
+    const [districts, setDistricts] = useState([defaultDistrict]);
+    const [wards, setWards] = useState([defaultWard]);
 
     const [province, setProvince] = useState(defaultProvince);
     const [district, setDistrict] = useState(defaultDistrict);
