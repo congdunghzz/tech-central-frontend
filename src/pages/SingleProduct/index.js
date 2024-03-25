@@ -9,7 +9,7 @@ function SingleProduct(){
         <>
             <Header/>
             <ProductInfo/>
-            <ProductList title={"Similar Products"}></ProductList>
+            <ProductList title={"Similar Products"} showingType={'col-xxl-3  col-lg-4 col-md-6'}></ProductList>
             <Footer/>
         </>
     );

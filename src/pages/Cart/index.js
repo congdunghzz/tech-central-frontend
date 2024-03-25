@@ -18,7 +18,7 @@ function Cart (){
                             <Link to= "/checkout" className="w-100">
 
                                 <button class="btn btn-primary w-100" type="button">Checkout</button>    
-                                </Link>
+                            </Link>
 
                         </div>
                 </div>
