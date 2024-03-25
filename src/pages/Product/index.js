@@ -1,13 +1,17 @@
+import { useEffect } from "react";
 import ProductList from "../../components/ProductList";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Categories from "../../components/Categories";
 function Product (){
 
+    useEffect( () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, []);
     return (
         <>
             <Header />
-            <div className="product-page, container-fluid">
+            <div className="mh-75 product-page, container-fluid">
                 <Categories />
                 <div className="row">
                     <div className=" col-md-2 col-sm-12">
@@ -33,7 +37,6 @@ function Product (){
                        </div>
                     </div>
                     <div className=" col-md-10 col-sm-12  container-fluid">
-                        <ProductList showingType={'col-xxl-4 col-xl-4 col-lg-6 col-md-6'}/>
                         <ProductList showingType={'col-xxl-4 col-xl-4 col-lg-6 col-md-6'}/>
                     </div>
                 </div>

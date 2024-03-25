@@ -144,7 +144,9 @@ function CheckOut(){
             </div>
 
             <div className="d-grid gap-2 col-4 mx-auto">
-                <button className="btn btn-primary" type="button">Finish</button>
+                <Link to="/orders" className="w-100">
+                    <button className="btn btn-primary w-100" type="button">Finish</button>
+                </Link>
             </div>
         </div>
     );

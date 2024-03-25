@@ -37,7 +37,7 @@ function CartItem (){
                 
                 <div className="d-flex col-3   align-items-center justify-content-center">
                         <button className="btn btn-light border-dark" onClick={() => handleIncrement("MINUS")}>-</button>
-                        <button className="btn btn-light border-dark">{amount}</button>
+                        <button className="btn btn-light border-dark" disabled>{amount}</button>
                         <button className="btn btn-light border-dark" onClick={() => handleIncrement("PLUS")}>+</button>
 
                 </div>

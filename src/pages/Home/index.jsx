@@ -8,6 +8,9 @@ import Banner from "../../components/Banner";
 import Categories from "../../components/Categories";
 
 function Home () {
+    useEffect( () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, []);
 
     // home page == col-xxl-3  col-lg-4 col-md-6
     // product page == col-xxl-4 col-xl-4 col-lg-6 col-md-6
