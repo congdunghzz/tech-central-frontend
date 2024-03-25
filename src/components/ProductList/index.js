@@ -1,7 +1,7 @@
 import "./ProductList.css"
 import ProductCart from "../ProductCart";
 
-function ProductList({title}) {
+function ProductList({title, showingType}) {
 
     let products = [1,2,3,4,5,6,7,8]
     return (
@@ -12,7 +12,7 @@ function ProductList({title}) {
 
             <div className="row mt-3">
                 
-                {products.map((product, index) => (<ProductCart key={index}/>))}
+                {products.map((product, index) => (<ProductCart key={index} showingType={showingType}/>))}
                
             </div>
         </div>

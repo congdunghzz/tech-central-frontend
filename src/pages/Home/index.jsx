@@ -9,17 +9,18 @@ import Categories from "../../components/Categories";
 
 function Home () {
 
+    // home page == col-xxl-3  col-lg-4 col-md-6
+    // product page == col-xxl-4 col-xl-4 col-lg-6 col-md-6
 
-    console.log("first");
     return (
         <>
             <Header/>
             <PriceSection/>
             <Categories/>
             <Features/>
-            <ProductList title="Trending Products"/>
+            <ProductList title="Trending Products" showingType={'col-xxl-3  col-lg-4 col-md-6'}/>
             <Banner/>
-            <ProductList title = "New Arrivals"/>
+            <ProductList title = "New Arrivals" showingType={'col-xxl-3  col-lg-4 col-md-6'}/>
             <Footer/>
         </>
         

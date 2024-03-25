@@ -3,13 +3,13 @@ import RatingStar from "../RatingStar";
 import { Link } from "react-router-dom";
 import ButtonAddToCart from "../ButtonAddToCart";
 
-function ProductCart ( key ) {
+function ProductCart ( {key, showingType} ) {
     const onLinkClick = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-
+    console.log(showingType);
     return (
-        <div key={key} className="col-xxl-3  col-xl-4 col-lg-4 col-md-6 col-sm-6" id="head">
+        <div key={key} className={`${showingType} col-sm-8`} id="head">
                     <div className="border border-secondary m-2 mb-2 border-opacity-25">
                         <div className="w-100">
                             <Link to={"/product/productId"} onClick={onLinkClick}>
