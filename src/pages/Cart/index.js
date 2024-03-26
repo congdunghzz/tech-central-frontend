@@ -16,7 +16,6 @@ function Cart (){
                     </div>
                         <div className="d-grid gap-2 col-4 ms-auto">
                             <Link to= "/checkout" className="w-100">
-
                                 <button class="btn btn-primary w-100" type="button">Checkout</button>    
                             </Link>
 

@@ -17,8 +17,7 @@ function PriceSection () {
                             <h2 className='mb-4'>Latest product line of Apple 2024</h2>
                             <h4 className='mb-4'>Exclusive offer <spam className = "text-danger">-10%</spam> off this week</h4>
                             <Link to = "/product">
-
-                            <button type="button" className="btn btn-outline-primary mb-4 ">Shop now</button>
+                                <button type="button" className="btn btn-outline-primary mb-4 ">Shop now</button>
                             </Link>
                         </div>
                     </div>
