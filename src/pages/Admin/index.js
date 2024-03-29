@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import AdminSideBar from "../../components/AdminSideBar";
 import ProductList from "../../components/ProductList";
 import ProductAdmin from "../ProductAdmin";
+
+
 function Admin() {
+    
+    
 
     const [tab, setTab] = useState('ProductList');
     const handleTabClick = (tab) =>{

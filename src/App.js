@@ -9,6 +9,7 @@ import Product from './pages/Product';
 import YourOrders from './pages/YourOrders';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import ProductModal from './components/ProductModal';
 function App() {
   return (
     <>
@@ -22,7 +23,7 @@ function App() {
           <Route path="/orders" element={<YourOrders />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
-          <Route path="/" element={<Admin />} />
+          <Route path="/admin/productDetail" element={<ProductModal />} />
         </Routes>
 
     </>

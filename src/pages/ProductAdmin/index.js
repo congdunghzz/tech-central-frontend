@@ -2,15 +2,37 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SingleProductAdmin from "../../components/SingleProductAdmin";
 import * as productService from "../../services/productService";
+import ProductModal from "../../components/ProductModal";
 
+
+
+export const initProduct =   {
+    "id": 0,
+    "name": "",
+    "price": 0,
+    "productImages": [
+      
+    ],
+    "productDetail": {
+      "id": 0,
+      "cpu": "",
+      "ram": 0,
+      "rom": 0,
+      "screen": 0,
+      "resolution": "",
+      "material": "",
+      "color": ""
+    },
+    "category": "",
+    "brand": ""
+  }
 function ProductAdmin() {
 
     const [productList, setProductList] = useState([]);
 
     const getProductList = async () => {
-        const res = await productService.getProducts();
-        console.log(productList);
-        setProductList(res.data);
+        const {data} = await productService.getProducts();
+        setProductList(data);
     }
     useEffect(() => {
         getProductList();
@@ -35,10 +57,13 @@ function ProductAdmin() {
                     </tr>
                 </thead>
                 <tbody>
-                    <SingleProductAdmin />
-                    <SingleProductAdmin />
+                    {
+                        productList.map(product => (<SingleProductAdmin product = {product}/>))
+                    }
+                    
                 </tbody>
             </table>
+             <ProductModal data = {initProduct}/> 
         </div>
     );
 }
