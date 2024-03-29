@@ -119,7 +119,7 @@ function CheckOut(){
                 </div>
                 <div className="input-group mb-3 w-75 my-4">
                     <span className="input-group-text" id="inputGroup-sizing-default">Phone</span>
-                    <input type="text" className="form-control" aria-label="Sizing example input"/>
+                    <input type="number" className="form-control" aria-label="Sizing example input"/>
                 </div>
                 <div className="input-group ">
                     <span className="input-group-text">Address</span>
