@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
 import SingleProductAdmin from "../../components/SingleProductAdmin";
 import * as productService from "../../services/productService";
 
-function ProductAdmin(productList) {
-    productService.getProducts();
+function ProductAdmin() {
+
+    const [productList, setProductList] = useState([]);
+
+    const getProductList = async () => {
+        const res = await productService.getProducts();
+        console.log(productList);
+        setProductList(res.data);
+    }
+    useEffect(() => {
+        getProductList();
+    }, []);
+
+
     return (
         <div className="row align-items-center d-flex ">
             <div className=" r-0">
@@ -23,8 +35,8 @@ function ProductAdmin(productList) {
                     </tr>
                 </thead>
                 <tbody>
-                    <SingleProductAdmin/>   
-                    <SingleProductAdmin/>   
+                    <SingleProductAdmin />
+                    <SingleProductAdmin />
                 </tbody>
             </table>
         </div>
