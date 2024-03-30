@@ -6,7 +6,6 @@ import ProductModal from "../ProductModal";
 
 function SingleProductAdmin(product) {
     const data = product.product;
-    console.log(data);
     const [productItem, setProductItem] = useState({})
     return (
         < >

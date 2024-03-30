@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import * as productService from "../../services/productService";
 
@@ -7,6 +7,7 @@ function ProductModal(data = {}) {
     data = data.data;
 
     const [formData, setFormData] = useState(data);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,19 +32,29 @@ function ProductModal(data = {}) {
 
     const handleSaveClick = async () => {
         if (JSON.stringify(data) != JSON.stringify(formData)) {
+
             alert('Are you sure you want to save');
+
             const res = await productService.updateProduct(data.id, formData)
 
-            if (res.status < 400) {
-                console.log(res);
-            } else { console.log(res.statusText) };
+            if (res.code) {
+                alert(res.message);
+            } else if (res.err) {
+                alert(res.err);
+            }else {
+                alert('updated successfully');
+
+            }
 
         }
     };
 
 
     const handleDeleteProductBtn = async () => {
+
+
         const res = (await productService.deleteProduct(data.id)).data;
+
         console.log(res);
     };
 
@@ -116,6 +127,7 @@ function ProductModal(data = {}) {
 
                         <button type="button"
                             className="btn btn-danger"
+                            onClick={() => { handleDeleteProductBtn() }}
                         >
                             Delete product
                         </button>
@@ -124,7 +136,7 @@ function ProductModal(data = {}) {
                     </div>
                 </div>
             </div>
-            
+
         </div>
     );
 }
