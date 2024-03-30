@@ -1,20 +1,23 @@
 
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import ProductModal from "../ProductModal";
 
 function SingleProductAdmin(product) {
     const data = product.product;
-
+    console.log(data);
     const [productItem, setProductItem] = useState({})
     return (
         < >
-            <tr key = {data.id}>
+            <tr key={data.id}>
                 <td>
                     <div className="basic-info">
                         <Link to="/product/productId/" className="text-decoration-none text-dark">
-                            <img className="mh-100 " src="https://anphat.com.vn/media/lib/05-04-2023/mbpro.jpg"></img>
+                            {data.productImages[0] ?
+                                (<img className="mh-100" src={`${data.productImages[0]['url']}`} alt="Product image"></img>)
+                                :
+                                (<img className="mh-100 " src="" alt="Product image"/>)}
                         </Link>
                     </div>
                 </td>
@@ -26,7 +29,7 @@ function SingleProductAdmin(product) {
                 <button className="btn btn-secondary ms-auto" type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop-${data.id}`} >Adjust</button>
 
             </tr>
-                <ProductModal data={data}/>
+            <ProductModal data={data} />
         </>
     );
 

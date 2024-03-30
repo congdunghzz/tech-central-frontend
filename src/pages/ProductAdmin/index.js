@@ -2,19 +2,14 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SingleProductAdmin from "../../components/SingleProductAdmin";
 import * as productService from "../../services/productService";
-import ProductModal from "../../components/ProductModal";
+
 
 
 
 export const initProduct = {
-    "id": 0,
     "name": "",
     "price": '',
-    "productImages": [
-
-    ],
     "productDetail": {
-        "id": 0,
         "cpu": "",
         "ram": '',
         "rom": '',
@@ -24,11 +19,13 @@ export const initProduct = {
         "color": ""
     },
     "category": "",
-    "brand": ""
+    "brand": "",
+    "images": []
 }
 function ProductAdmin() {
 
     const [productList, setProductList] = useState([]);
+    const [images, setImages] = useState([]);
 
     const getProductList = async () => {
         const { data } = await productService.getProducts();
@@ -38,6 +35,40 @@ function ProductAdmin() {
 
 
     const [formData, setFormData] = useState(initProduct);
+
+
+
+                                                // save product
+    const saveProduct = async () => {
+
+        const data = new FormData();
+        data.append('name', formData.name);
+        data.append('price', formData.price);
+        data.append('category', formData.category);
+        data.append('brand', formData.brand);
+
+        Object.keys(formData.productDetail).forEach(key => {
+            data.append(`productDetail.${key}`, formData.productDetail[key]);
+          });
+
+        
+
+        images.forEach(((img, index) => {
+            data.append(`images`, img);
+        }))
+
+        const res = await productService.postNewProduct(data);
+        console.log(res);
+    }
+
+
+
+
+    const handleImageChange = (event) => {
+        const selectedImages = Array.from(event.target.files);
+        setImages(selectedImages);
+      };
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -59,8 +90,8 @@ function ProductAdmin() {
         }
     };
 
-    const handleSaveClick = () =>{
-        console.log(formData);
+    const handleSaveClick = () => {
+        saveProduct();
         alert('Save new product');
     }
 
@@ -147,7 +178,7 @@ function ProductAdmin() {
                                 </div>
                                 <div className="input-group pe-2 mb-5">
                                     <span className="input-group-text" id="inputGroup-sizing-default">Screen</span>
-                                    <input type="text" className="form-control" aria-label="Sizing example input" name="productDetail.screen" value={formData.productDetail.screen} onChange={(e) => { handleChange(e) }} />
+                                    <input type="number" className="form-control" aria-label="Sizing example input" name="productDetail.screen" value={formData.productDetail.screen} onChange={(e) => { handleChange(e) }} />
                                 </div>
                                 <div className="input-group pe-2 mb-5">
                                     <span className="input-group-text" id="inputGroup-sizing-default">resolution</span>
@@ -165,10 +196,10 @@ function ProductAdmin() {
                             </div>
                         </div>
                         <div className="input-group mb-3">
-                            <input type="file" className="form-control" accept="image/png, image/jpeg" multiple name ="productImages.url"/>
+                            <input type="file" className="form-control" accept="image/png, image/jpeg" name="images" multiple onChange={(e) => { handleImageChange(e) }}/>
                         </div>
                         <div className="modal-footer">
-                            
+
                             <button type="button" className="btn btn-primary" onClick={() => { handleSaveClick() }}>Add New</button>
                         </div>
                     </div>
