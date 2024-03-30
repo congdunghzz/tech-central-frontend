@@ -12,7 +12,7 @@ export async function getProducts() {
 
 
 export async function postNewProduct(formData) {
-    try{
+    try {
 
         return await axios.post(`${ApiUrl}/product`, formData,
             {
@@ -22,11 +22,11 @@ export async function postNewProduct(formData) {
     } catch (error) {
         if (error.response.data.statusCode >= 400) {
             return {
-                code : error.response.data.statusCode,
+                code: error.response.data.statusCode,
                 message: error.response.data.message
-             }; 
+            };
         } else {
-            return { error: "An error occurred while updating the product." }; 
+            return { error: "An error occurred while updating the product." };
         }
     }
 }
@@ -43,15 +43,34 @@ export async function updateProduct(productId, product) {
     } catch (error) {
         if (error.response.data.statusCode >= 400) {
             return {
-                code : error.response.data.statusCode,
+                code: error.response.data.statusCode,
                 message: error.response.data.message
-             }; 
+            };
         } else {
-            return { error: "An error occurred while updating the product." }; 
+            return { error: "An error occurred while updating the product." };
         }
     }
 
 }
 export async function deleteProduct(productId) {
     return await axios.delete(`${ApiUrl}/product/${productId}`);
+}
+
+export async function importImages(productId, formData) {
+
+    try {
+        return await axios.post(`${ApiUrl}/product/${productId}/image`, formData , {
+            headers: { 'Content-Type': 'multipart/form-data'}
+        });
+    } catch (error) {
+        if (error.response.data.statusCode >= 400) {
+            return {
+                code: error.response.data.statusCode,
+                message: error.response.data.message
+            };
+        } else {
+            return { error: "An error occurred while updating the product." };
+        }
+    }
+
 }

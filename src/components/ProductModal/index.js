@@ -7,6 +7,9 @@ function ProductModal(data = {}) {
     data = data.data;
 
     const [formData, setFormData] = useState(data);
+    const [showImageInput, setShowImageInput] = useState(false);
+
+    const [images, setImages] = useState([]);
 
 
     const handleChange = (e) => {
@@ -33,17 +36,17 @@ function ProductModal(data = {}) {
     const handleSaveClick = async () => {
         if (JSON.stringify(data) != JSON.stringify(formData)) {
 
-            if(window.confirm('Are you sure you want to save')){
+            if (window.confirm('Are you sure you want to save')) {
 
                 const res = await productService.updateProduct(data.id, formData)
-    
+
                 if (res.code) {
                     alert(res.message);
                 } else if (res.err) {
                     alert(res.err);
-                }else {
+                } else {
                     alert('updated successfully');
-    
+
                 }
             }
 
@@ -54,13 +57,35 @@ function ProductModal(data = {}) {
 
     const handleDeleteProductBtn = async () => {
 
-        if(window.confirm('Are you sure you want to save')){
+        if (window.confirm('Are you sure you want to save')) {
 
             const res = (await productService.deleteProduct(data.id)).data;
-    
+
             console.log(res);
         }
     };
+
+    const handleImportImagesBtn = async () => {
+        console.log(images);
+        let formData = new FormData();
+
+        images.forEach(image => {
+            formData.append('images', image);
+        })
+
+        if (window.confirm('Import images ??')) {
+
+            const res = (await productService.importImages(data.id, formData)).data;
+            console.log(res);
+            setImages([])
+        }
+    }
+
+    const onChangeImageInput = (e) => {
+        const selectedImages = Array.from(e.target.files);
+        setImages(selectedImages);
+
+    }
 
 
     return (
@@ -70,7 +95,7 @@ function ProductModal(data = {}) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1 className="modal-title fs-5" id="exampleModalLabel">{data.name}</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data) }}></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]) }}></button>
                     </div>
                     <div className="modal-body container-fluid row">
                         <div className="col-6">
@@ -127,9 +152,9 @@ function ProductModal(data = {}) {
 
                         </div>
                     </div>
-                    <div className="modal-footer">  
+                    <div className="modal-footer">
 
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data) }}>Close</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]) }}>Close</button>
 
                         <button type="button"
                             className="btn btn-danger"
@@ -139,7 +164,13 @@ function ProductModal(data = {}) {
                         </button>
 
                         <button type="button" className="btn btn-primary" onClick={() => { handleSaveClick() }}>Save changes</button>
+                        <button type="button" className="btn btn-info" onClick={() => { setShowImageInput(!showImageInput) }}>Import images</button>
                     </div>
+
+                    { showImageInput && (<div className="input-group mb-3">
+                        <input type="file" className="form-control" id="inputGroupFile02" multiple name="images" onChange={(e) => {onChangeImageInput(e)}}/>
+                        <button className="btn btn-outline-success" onClick={() => {handleImportImagesBtn()}}>Upload</button>
+                    </div>)}
                 </div>
             </div>
 
