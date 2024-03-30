@@ -33,18 +33,20 @@ function ProductModal(data = {}) {
     const handleSaveClick = async () => {
         if (JSON.stringify(data) != JSON.stringify(formData)) {
 
-            alert('Are you sure you want to save');
+            if(window.confirm('Are you sure you want to save')){
 
-            const res = await productService.updateProduct(data.id, formData)
-
-            if (res.code) {
-                alert(res.message);
-            } else if (res.err) {
-                alert(res.err);
-            }else {
-                alert('updated successfully');
-
+                const res = await productService.updateProduct(data.id, formData)
+    
+                if (res.code) {
+                    alert(res.message);
+                } else if (res.err) {
+                    alert(res.err);
+                }else {
+                    alert('updated successfully');
+    
+                }
             }
+
 
         }
     };
@@ -52,10 +54,12 @@ function ProductModal(data = {}) {
 
     const handleDeleteProductBtn = async () => {
 
+        if(window.confirm('Are you sure you want to save')){
 
-        const res = (await productService.deleteProduct(data.id)).data;
-
-        console.log(res);
+            const res = (await productService.deleteProduct(data.id)).data;
+    
+            console.log(res);
+        }
     };
 
 
@@ -123,7 +127,9 @@ function ProductModal(data = {}) {
 
                         </div>
                     </div>
-                    <div className="modal-footer">
+                    <div className="modal-footer">  
+
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data) }}>Close</button>
 
                         <button type="button"
                             className="btn btn-danger"

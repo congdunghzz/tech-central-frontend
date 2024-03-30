@@ -9,12 +9,26 @@ export async function getProducts() {
     return await axios.get(`${ApiUrl}/product`);
 }
 
+
+
 export async function postNewProduct(formData) {
-    return await axios.post(`${ApiUrl}/product`, formData,
-        {
-            headers: { 'Content-Type': `multipart/form-data` }
+    try{
+
+        return await axios.post(`${ApiUrl}/product`, formData,
+            {
+                headers: { 'Content-Type': `multipart/form-data` }
+            }
+        );
+    } catch (error) {
+        if (error.response.data.statusCode >= 400) {
+            return {
+                code : error.response.data.statusCode,
+                message: error.response.data.message
+             }; 
+        } else {
+            return { error: "An error occurred while updating the product." }; 
         }
-    );
+    }
 }
 
 export async function updateProduct(productId, product) {

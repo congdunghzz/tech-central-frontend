@@ -25,7 +25,7 @@ function SingleProductAdmin(product) {
                 <td>{data.price}</td>
                 <td>{data.brand}</td>
                 <td>{data.category}</td>
-                <button className="btn btn-secondary ms-auto" type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop-${data.id}`} >Adjust</button>
+                <button className="btn btn-secondary ms-auto" type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop-${data.id}`} >---</button>
 
             </tr>
             <ProductModal data={data} />

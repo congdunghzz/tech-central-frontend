@@ -38,7 +38,7 @@ function ProductAdmin() {
 
 
 
-                                                // save product
+    // save product
     const saveProduct = async () => {
 
         const data = new FormData();
@@ -49,16 +49,25 @@ function ProductAdmin() {
 
         Object.keys(formData.productDetail).forEach(key => {
             data.append(`productDetail.${key}`, formData.productDetail[key]);
-          });
+        });
 
-        
+
 
         images.forEach(((img, index) => {
             data.append(`images`, img);
         }))
 
         const res = await productService.postNewProduct(data);
-        console.log(res);
+
+        if (res.code) {
+            alert(res.message);
+        } else if (res.err) {
+            alert(res.err);
+        } else {
+            alert('updated successfully');
+
+        }
+
     }
 
 
@@ -67,8 +76,8 @@ function ProductAdmin() {
     const handleImageChange = (event) => {
         const selectedImages = Array.from(event.target.files);
         setImages(selectedImages);
-      };
-    
+    };
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -91,8 +100,11 @@ function ProductAdmin() {
     };
 
     const handleSaveClick = () => {
-        saveProduct();
-        alert('Save new product');
+        if (window.confirm('Save Product')) {
+
+            saveProduct();
+        }
+
     }
 
 
@@ -196,9 +208,10 @@ function ProductAdmin() {
                             </div>
                         </div>
                         <div className="input-group mb-3">
-                            <input type="file" className="form-control" accept="image/png, image/jpeg" name="images" multiple onChange={(e) => { handleImageChange(e) }}/>
+                            <input type="file" className="form-control" accept="image/png, image/jpeg" name="images" multiple onChange={(e) => { handleImageChange(e) }} />
                         </div>
                         <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
 
                             <button type="button" className="btn btn-primary" onClick={() => { handleSaveClick() }}>Add New</button>
                         </div>
