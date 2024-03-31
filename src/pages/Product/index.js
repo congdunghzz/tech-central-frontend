@@ -1,18 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductList from "../../components/ProductList";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Categories from "../../components/Categories";
+import {getCategories} from "../../services/categoryService";
+
 function Product (){
+
+    const [ categories, setCategories] = useState([]);
+
+    const getAllCategories = async () => {
+        const {data} = await getCategories();
+        setCategories(data);
+        console.log(data);
+    };
 
     useEffect( () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, []);
+
+    useEffect( () =>{
+        getAllCategories();
     }, []);
     return (
         <>
             <Header />
             <div className="mh-75 product-page, container-fluid">
-                <Categories />
+                <Categories  categories={categories}/>
                 <div className="row">
                     <div className=" col-md-2 col-sm-12">
                        <div className="mt-4">

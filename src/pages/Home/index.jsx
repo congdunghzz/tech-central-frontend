@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import PriceSection from "../../components/PriceSection";
 import Features from "../../components/Features";
@@ -6,8 +6,20 @@ import Footer from "../../components/Footer";
 import ProductList from "../../components/ProductList";
 import Banner from "../../components/Banner";
 import Categories from "../../components/Categories";
+import { getCategories } from "../../services/categoryService";
 
 function Home () {
+    const [ categories, setCategories] = useState([]);
+
+    const getAllCategories = async () => {
+        const {data} = await getCategories();
+        setCategories(data);
+        console.log(data);
+    };
+    useEffect( () => {
+        getAllCategories();
+    }, []);
+
     useEffect( () => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }, []);
@@ -19,7 +31,7 @@ function Home () {
         <>
             <Header/>
             <PriceSection/>
-            <Categories/>
+            <Categories categories={categories}/>
             <Features/>
             <ProductList title="Trending Products" showingType={'col-xxl-3  col-lg-4 col-md-6'}/>
             <Banner/>

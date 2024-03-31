@@ -3,13 +3,15 @@ import { Link } from "react-router-dom";
 import AdminSideBar from "../../components/AdminSideBar";
 import ProductList from "../../components/ProductList";
 import ProductAdmin from "../ProductAdmin";
+import AdminCategory from "../AdminCategory";
 
 
 function Admin() {
     
     
 
-    const [tab, setTab] = useState('ProductList');
+    const [tab, setTab] = useState('Products');
+
     const handleTabClick = (tab) =>{
         setTab(tab);
     }
@@ -23,11 +25,12 @@ function Admin() {
                         <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-profile" onClick={() => handleTabClick("Orders")}>Orders</a>
                         <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-messages" onClick={() => handleTabClick("Customer accounts")}>Customer accounts</a>
                         <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-settings" onClick={() => handleTabClick("Brand")}>Brand</a>
-                        <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-settings" onClick={() => handleTabClick("Category")}>Category</a>
+                        <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-settings" onClick={() => handleTabClick("Categories")}>Category</a>
                     </div>
                 </div>
                 <div className="col-lg-10 ps-4">
-                    <ProductAdmin  />
+                    { tab =="Products" && <ProductAdmin  />}
+                    { tab =="Categories" && <AdminCategory  />}
                 </div>
             </div>
         </div>
