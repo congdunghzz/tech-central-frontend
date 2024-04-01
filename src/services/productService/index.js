@@ -38,7 +38,10 @@ export async function postNewProduct(formData) {
                 message: error.response.data.message
             };
         } else {
-            return { error: "An error occurred while updating the product." };
+            return {
+                code: 500,
+                message: "An error occurred while updating the product."
+            }
         }
     }
 }
@@ -59,7 +62,10 @@ export async function updateProduct(productId, product) {
                 message: error.response.data.message
             };
         } else {
-            return { error: "An error occurred while updating the product." };
+            return {
+                code: 500,
+                message: "An error occurred while updating the product."
+            }
         }
     }
 
@@ -82,7 +88,10 @@ export async function importImages(productId, formData) {
                 message: error.response.data.message
             };
         } else {
-            return { error: "An error occurred while updating the product." };
+            return {
+                code: 500,
+                message: "An error occurred while updating the product."
+            }
         }
     }
 

@@ -184,11 +184,12 @@ function ProductAdmin() {
 
             </ul>
             {
-                productList.length >= 0 ?
+                
                     (<>
                         <div className=" r-0 mt-5">
                             <button type="button" className="btn btn-success btn-lg ms-auto r-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button>
-                        </div><table className="table table-hover ms-3">
+                        </div>
+                        <table className="table table-hover ms-3 mt-5">
                             <thead>
                                 <tr>
                                     <th scope="col"></th>
@@ -206,10 +207,7 @@ function ProductAdmin() {
                         </table>
 
                     </>)
-                    :
-                    (<>
-                        <h2>LOADING......</h2>
-                    </>)
+                    
             }
 
             <div className="modal fade" id={`staticBackdrop`} data-bs-backdrop="static" tabIndex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -39,12 +39,13 @@ function ProductModal(data = {}) {
             if (window.confirm('Are you sure you want to save')) {
 
                 const res = await productService.updateProduct(data.id, formData)
-
+                
                 if (res.code) {
                     alert(res.message);
-                } else if (res.err) {
+                }else if (res.err) {
                     alert(res.err);
                 } else {
+                    setFormData(res.data);
                     alert('updated successfully');
 
                 }
@@ -101,7 +102,7 @@ function ProductModal(data = {}) {
                         <div className="col-6">
                             <div className="input-group pe-2 mb-5">
                                 <span className="input-group-text" id="inputGroup-sizing-default">ID</span>
-                                <input type="text" className="form-control" aria-label="Sizing example input" value={data.id} readOnly />
+                                <input type="text" className="form-control" aria-label="Sizing example input" value={data.id} readOnly disabled/>
                             </div>
                             <div className="input-group pe-2 mb-5">
                                 <span className="input-group-text" id="inputGroup-sizing-default">Name</span>
