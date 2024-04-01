@@ -50,6 +50,11 @@ function ProductAdmin() {
         setBrands(data);
     }
 
+    const getProductsByCategoryAndBrand = async () => {
+        const { data } = await productService.getProductsByCategoryAndBrand(category, brand);
+        setProductList(data);
+    }
+
     // save product
     const saveProduct = async () => {
 
@@ -139,6 +144,11 @@ function ProductAdmin() {
         getProductList();
     }, []);
 
+
+    useEffect(() => {
+        getProductsByCategoryAndBrand();
+
+    }, [category, brand]);
 
     return (
 
