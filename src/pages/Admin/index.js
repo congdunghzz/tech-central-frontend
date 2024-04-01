@@ -4,6 +4,7 @@ import AdminSideBar from "../../components/AdminSideBar";
 import ProductList from "../../components/ProductList";
 import ProductAdmin from "../ProductAdmin";
 import AdminCategory from "../AdminCategory";
+import AdminBrand from "../AdminBrand";
 
 
 function Admin() {
@@ -31,6 +32,7 @@ function Admin() {
                 <div className="col-lg-10 ps-4">
                     { tab =="Products" && <ProductAdmin  />}
                     { tab =="Categories" && <AdminCategory  />}
+                    { tab =="Brand" && <AdminBrand />}
                 </div>
             </div>
         </div>
