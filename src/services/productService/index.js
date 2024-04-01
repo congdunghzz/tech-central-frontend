@@ -9,6 +9,18 @@ export async function getProducts() {
     return await axios.get(`${ApiUrl}/product`);
 }
 
+export async function getProductsByCategory(categoryName) {
+    return await axios.get(`${ApiUrl}/product/category?name=${categoryName}` );
+}
+
+export async function getProductsByCategoryAndBrand(category, brand) {
+    return await axios.get(`${ApiUrl}/product/category/brand`, {
+        params: {
+            category,
+            brand
+        }
+    });
+}
 
 
 export async function postNewProduct(formData) {
@@ -55,6 +67,7 @@ export async function updateProduct(productId, product) {
 export async function deleteProduct(productId) {
     return await axios.delete(`${ApiUrl}/product/${productId}`);
 }
+
 
 export async function importImages(productId, formData) {
 

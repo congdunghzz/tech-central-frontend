@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SingleProductAdmin from "../../components/SingleProductAdmin";
 import * as productService from "../../services/productService";
-
-
+import * as categoryService from "../../services/categoryService";
+import * as brandService from "../../services/brandService";
 
 
 export const initProduct = {
@@ -26,6 +25,13 @@ function ProductAdmin() {
 
     const [productList, setProductList] = useState([]);
     const [images, setImages] = useState([]);
+    const [formData, setFormData] = useState(initProduct);
+
+    const [categories, setCategories] = useState([]);
+    const [category, setCategory] = useState('');
+
+    const [brands, setBrands] = useState([]);
+    const [brand, setBrand] = useState('');
 
     const getProductList = async () => {
         const { data } = await productService.getProducts();
@@ -34,9 +40,15 @@ function ProductAdmin() {
 
 
 
-    const [formData, setFormData] = useState(initProduct);
+    const getAllCategories = async () => {
+        const { data } = await categoryService.getCategories();
+        setCategories(data);
+    }
 
-
+    const getAllBrand = async () => {
+        const { data } = await brandService.getBrands();
+        setBrands(data);
+    }
 
     // save product
     const saveProduct = async () => {
@@ -53,7 +65,7 @@ function ProductAdmin() {
 
 
 
-        images.forEach(((img, index) => {
+        images.forEach(((img) => {
             data.append(`images`, img);
         }))
 
@@ -107,6 +119,21 @@ function ProductAdmin() {
 
     }
 
+    const labelCategoryClick = (categoryName) => {
+        setCategory(categoryName);
+    }
+
+    const handleBrandClick = (brandName) => {
+        setBrand(brandName);
+    }
+
+    useEffect(() => {
+        getAllCategories();
+    }, [])
+
+    useEffect(() => {
+        getAllBrand();
+    }, [])
 
     useEffect(() => {
         getProductList();
@@ -116,10 +143,40 @@ function ProductAdmin() {
     return (
 
         <div className="row align-items-center d-flex ">
+
+            <div className="btn-group mb-5" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" className="btn-check" id="all" name="btnradio" autoComplete="off" checked={category === ''} />
+                <label className="btn btn-outline-primary" for="all" onClick={() => { labelCategoryClick('') }}>All</label>
+                {categories.map(c =>
+                    <>
+                        <input type="radio" className="btn-check" id={`${c.name}`} name="btnradio"
+                            autoComplete="off" value={`${c.name}`}
+                            checked={category === c.name} />
+                        <label className="btn btn-outline-primary" for={`${c.name}`} onClick={() => { labelCategoryClick(c.name) }}>{c.name} </label>
+                    </>
+                )
+                }
+
+            </div>
+            <ul className="nav nav-tabs">
+                <li className="nav-item">
+                    <a className={`nav-link  ${brand === '' ? 'active' : ''}`} href="#" onClick={() => {handleBrandClick('')}}>All</a>
+                </li>
+                {
+
+                    brands.map(item => (
+                        <li className='nav-item'>
+                            <a className={`nav-link  ${brand === item.name ? 'active' : ''}`} href="#" onClick={() => {handleBrandClick(item.name)}}>{item.name}</a>
+                        </li>
+                    ))
+                }
+
+
+            </ul>
             {
                 productList.length >= 0 ?
                     (<>
-                        <div className=" r-0">
+                        <div className=" r-0 mt-5">
                             <button type="button" className="btn btn-success btn-lg ms-auto r-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button>
                         </div><table className="table table-hover ms-3">
                             <thead>
