@@ -21,7 +21,11 @@ function AdminCategory() {
 
     const onInputChange = (e) => {
         const name = e.target.value;
-        setCategory(name);
+        setCategory(prevData => ({
+            ...prevData,
+            name: name
+            }));
+        console.log(category);
     };
     const closeModalClick = () => {
         
@@ -32,6 +36,23 @@ function AdminCategory() {
     useEffect(() => {
         getAllCategories();
     }, []);
+
+
+    const addCategory = async () => {  
+        if (JSON.stringify(category) != JSON.stringify(initCategory)) {
+
+            if (window.confirm('Are you sure you want to save')) {
+                const res = await categoryService.postCategory(category);
+                console.log(res);
+                if (res.code) {
+                    alert(res.message);
+                } else {
+                    setCategory(res.data);
+                    alert('updated successfully');
+                }
+            }
+        }
+    }
 
     return (
         <div className="row align-items-center d-flex ">
@@ -87,7 +108,7 @@ function AdminCategory() {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeModalClick}>Close</button>
-                                    <button type="button" className="btn btn-primary">Understood</button>
+                                    <button type="button" className="btn btn-primary" onClick={addCategory}>Add New</button>
                                 </div>
                             </div>
                         </div>

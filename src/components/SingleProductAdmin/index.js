@@ -16,7 +16,7 @@ function SingleProductAdmin(product) {
                             {data.productImages[0] ?
                                 (<img className="mh-100" src={`${data.productImages[0]['url']}`} alt="Product image"></img>)
                                 :
-                                (<img className="mh-100 " src="" alt="Product image"/>)}
+                                (<img className="mh-100 " src="" alt="Product image" />)}
                         </Link>
                     </div>
                 </td>

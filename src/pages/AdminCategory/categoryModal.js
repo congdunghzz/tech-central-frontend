@@ -35,6 +35,15 @@ function CategoryModal(props) {
         }
     }
 
+    const deleteCategory = async () => {
+        if (window.confirm('Are you sure you want to save')) {
+
+            const res = await categoryService.deleteCategory(data.id);
+
+            console.log(res);
+        }
+    }
+
 
     return (
         <div key={data.id} className="modal fade" id={`categoryModal-${category.id}`} data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-hidden="true">
@@ -56,7 +65,7 @@ function CategoryModal(props) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeModalClick}>Close</button>
-                        <button type="button" className="btn btn-danger">Delete</button>
+                        <button type="button" className="btn btn-danger" onClick={deleteCategory}>Delete</button>
                         <button type="button" className="btn btn-primary" onClick={saveCategory}>Save</button>
                     </div>
                 </div>

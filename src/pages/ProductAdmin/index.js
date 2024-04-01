@@ -170,13 +170,13 @@ function ProductAdmin() {
             </div>
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <a className={`nav-link  ${brand === '' ? 'active' : ''}`} href="#" onClick={() => {handleBrandClick('')}}>All</a>
+                    <a className={`nav-link  ${brand === '' ? 'active' : ''}`} href="#" onClick={() => { handleBrandClick('') }}>All</a>
                 </li>
                 {
 
                     brands.map(item => (
                         <li className='nav-item'>
-                            <a className={`nav-link  ${brand === item.name ? 'active' : ''}`} href="#" onClick={() => {handleBrandClick(item.name)}}>{item.name}</a>
+                            <a className={`nav-link  ${brand === item.name ? 'active' : ''}`} href="#" onClick={() => { handleBrandClick(item.name) }}>{item.name}</a>
                         </li>
                     ))
                 }
@@ -184,30 +184,39 @@ function ProductAdmin() {
 
             </ul>
             {
-                
-                    (<>
-                        <div className=" r-0 mt-5">
-                            <button type="button" className="btn btn-success btn-lg ms-auto r-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button>
-                        </div>
-                        <table className="table table-hover ms-3 mt-5">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Category</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {productList.map(product => (<SingleProductAdmin product={product} />))}
 
-                            </tbody>
-                        </table>
-
-                    </>)
+                (<>
+                    <div className=" r-0 mt-5">
+                        <button type="button" className="btn btn-success btn-lg ms-auto r-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button>
+                    </div>
                     
+                    <table className="table table-hover ms-3 mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">Category</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                productList ? productList.map(product => (<SingleProductAdmin product={product} />))
+                                    :
+                                    (<div className="d-flex align-items-center justify-content-center">
+                                        <h2>
+                                        This filter have no product
+                                        </h2>
+                                    </div>)
+                            }
+
+                        </tbody>
+                    </table>
+
+                </>)
+
             }
 
             <div className="modal fade" id={`staticBackdrop`} data-bs-backdrop="static" tabIndex="-1" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
