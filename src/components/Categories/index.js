@@ -5,7 +5,6 @@ import "./Categories.css"
 function Categories(props) {
 
     const categories = props.categories;
-    console.log(props.categories);
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
