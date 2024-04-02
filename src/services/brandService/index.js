@@ -47,5 +47,19 @@ export async function updateBrand(id, data) {
 }
 
 export async function deleteBrand(id) {
-    return await axios.delete(`${ApiUrl}/brand/${id}`);
+    try{
+        return await axios.delete(`${ApiUrl}/brand/${id}`);
+    }catch(error) {
+        if (error.response.data.statusCode >= 400) {
+            return {
+                code: error.response.data.statusCode,
+                message: error.response.data.message
+            };
+        } else {
+            return {
+                code: 500,
+                message: "An error occurred while updating the product."
+            };
+        }
+    }
 }

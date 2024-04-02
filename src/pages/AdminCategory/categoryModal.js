@@ -41,6 +41,12 @@ function CategoryModal(props) {
             const res = await categoryService.deleteCategory(data.id);
 
             console.log(res);
+                if (res.code) {
+                    alert(res.message);
+                } else {
+                    setCategory(res.data);
+                    alert('delete successfully');
+                }
         }
     }
 

@@ -99,7 +99,7 @@ function AdminBrand() {
                                 <div className="modal-body">
                                     <div className="input-group pe-2 mb-5">
                                         <span className="input-group-text" id="inputGroup-sizing-default">ID</span>
-                                        <input type="text" className="form-control" aria-label="Sizing example input" value={brand.id} readOnly disabled />
+                                        <input type="text" className="form-control" aria-label="Sizing example input" value={''} readOnly disabled />
                                     </div>
                                     <div className="input-group pe-2 mb-5">
                                         <span className="input-group-text" id="inputGroup-sizing-default">Name</span>

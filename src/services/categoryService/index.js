@@ -49,5 +49,19 @@ export async function updateCategory(id, data) {
 }
 
 export async function deleteCategory(id) {
-    return await axios.delete(`${ApiUrl}/category/${id}`);
+    try{
+        return await axios.delete(`${ApiUrl}/category/${id}`);
+    }catch(error) {
+        if (error.response.data.statusCode >= 400) {
+            return {
+                code: error.response.data.statusCode,
+                message: error.response.data.message
+            };
+        } else {
+            return {
+                code: 500,
+                message: "An error occurred while updating the product."
+            };
+        }
+    }
 }

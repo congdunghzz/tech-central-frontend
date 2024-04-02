@@ -156,13 +156,13 @@ function ProductAdmin() {
 
             <div className="btn-group mb-5" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" className="btn-check" id="all" name="btnradio" autoComplete="off" checked={category === ''} />
-                <label className="btn btn-outline-primary" for="all" onClick={() => { labelCategoryClick('') }}>All</label>
+                <label className="btn btn-outline-primary" htmlFor="all" onClick={() => { labelCategoryClick('') }}>All</label>
                 {categories.map(c =>
                     <>
-                        <input type="radio" className="btn-check" id={`${c.name}`} name="btnradio"
+                        <input key={c.id} type="radio" className="btn-check" id={`${c.name}`} name="btnradio"
                             autoComplete="off" value={`${c.name}`}
                             checked={category === c.name} />
-                        <label className="btn btn-outline-primary" for={`${c.name}`} onClick={() => { labelCategoryClick(c.name) }}>{c.name} </label>
+                        <label className="btn btn-outline-primary" htmlFor={`${c.name}`} onClick={() => { labelCategoryClick(c.name) }}>{c.name} </label>
                     </>
                 )
                 }
@@ -175,7 +175,7 @@ function ProductAdmin() {
                 {
 
                     brands.map(item => (
-                        <li className='nav-item'>
+                        <li key={item.id} className='nav-item'>
                             <a className={`nav-link  ${brand === item.name ? 'active' : ''}`} href="#" onClick={() => { handleBrandClick(item.name) }}>{item.name}</a>
                         </li>
                     ))
