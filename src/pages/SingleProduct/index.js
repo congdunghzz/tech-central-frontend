@@ -4,7 +4,7 @@ import ProductInfo from "../../components/ProductInfo";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ProductList from "../../components/ProductList";
-import { getProductById, getProducts } from "../../services/productService";
+import { getProductById, getProducts, getProductsByCategoryAndBrand } from "../../services/productService";
 
 const initProduct = {
     "name": "",
@@ -35,7 +35,7 @@ function SingleProduct() {
     const [product, setProduct] = useState(initProduct);
 
     const getAllProducts = async ()=>{
-        const {data} = await getProducts();
+        const {data} = await getProductsByCategoryAndBrand(product.category, product.brand);
         setSimilar(data);
     }
 
@@ -51,7 +51,7 @@ function SingleProduct() {
 
     useEffect(() =>{
         getAllProducts();
-    }, []);
+    }, [product]);
 
      
         return (

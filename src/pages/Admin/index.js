@@ -8,21 +8,21 @@ import AdminBrand from "../AdminBrand";
 
 
 function Admin() {
-    
-    
+
+
 
     const [tab, setTab] = useState('Products');
 
-    const handleTabClick = (tab) =>{
+    const handleTabClick = (tab) => {
         setTab(tab);
     }
 
-    return (
+    return (    
         <div className="container-fluid mt-5">
             <div className="row ">
                 <div className="col-lg-2 mb-5">
                     <div className="  ps-4 list-group list-group-flush justify-content-center" role="tablist">
-                        <a className="list-group-item list-group-item-action active" data-bs-toggle="list" role="tab" aria-controls="list-home"onClick={() => handleTabClick("Products")}>Products</a>
+                        <a className="list-group-item list-group-item-action active" data-bs-toggle="list" role="tab" aria-controls="list-home" onClick={() => handleTabClick("Products")}>Products</a>
                         <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-profile" onClick={() => handleTabClick("Orders")}>Orders</a>
                         <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-messages" onClick={() => handleTabClick("Customer accounts")}>Customer accounts</a>
                         <a className="list-group-item list-group-item-action" data-bs-toggle="list" role="tab" aria-controls="list-settings" onClick={() => handleTabClick("Brand")}>Brand</a>
@@ -30,9 +30,9 @@ function Admin() {
                     </div>
                 </div>
                 <div className="col-lg-10 ps-4">
-                    { tab =="Products" && <ProductAdmin  />}
-                    { tab =="Categories" && <AdminCategory  />}
-                    { tab =="Brand" && <AdminBrand />}
+                    {tab == "Products" && <ProductAdmin />}
+                    {tab == "Categories" && <AdminCategory />}
+                    {tab == "Brand" && <AdminBrand />}
                 </div>
             </div>
         </div>
