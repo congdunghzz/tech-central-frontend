@@ -1,0 +1,14 @@
+
+
+.thumb-list {
+    height: 3rem;
+}
+
+.thumb {
+    width: 3rem;
+}
+.thumb:hover {
+    cursor: pointer;
+    width: 3.5rem;
+    border: 1px solid;
+}

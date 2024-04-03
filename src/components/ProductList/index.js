@@ -3,7 +3,6 @@ import ProductCart from "../ProductCart";
 
 function ProductList({title, showingType, products}) {
     
-    console.log(products);
     
     return (
         <div className="product-list container-fluid my-4 px-3">
