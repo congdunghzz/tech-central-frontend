@@ -37,7 +37,7 @@ function CheckOut(){
             try {
                 const data = await getProvinces();
                 setProvinces(data.results);
-;            } catch (error) {
+            } catch (error) {
                 console.error("Error fetching provinces:", error);
             }
         };

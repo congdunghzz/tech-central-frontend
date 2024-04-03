@@ -22,6 +22,14 @@ export async function getProductsByCategoryAndBrand(category, brand) {
     });
 }
 
+export async function getProductById(id) {
+    try {
+        const res = await axios.get(`${ApiUrl}/product/${id}`);
+        return res;
+    } catch (error) {
+       
+    }
+}
 
 export async function postNewProduct(formData) {
     try {

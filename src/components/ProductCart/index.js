@@ -9,11 +9,11 @@ function ProductCart ( {key, showingType, product} ) {
     }
     
     return (
-        <div key={key} className={`${showingType} col-sm-8`}>
-                    <div className="border border-secondary m-2 mb-2 border-opacity-25">
-                        <div className="w-100">
-                            <Link to={"/product/productId"} onClick={onLinkClick}>
-                                <img className="mw-100 d-inline-block" src={`${product.productImages[0]['url']}`} alt="Product Image"></img>                     
+        <div key={key} className={`${showingType} col-sm-8 `}>
+                    <div className="border border-secondary m-2 mb-2 border-opacity-25 w-100 ">
+                        <div className="w-100 d-flex justify-content-center align-items-center" style={{height:"240px"}}>
+                            <Link to={`/product/${product.id}`} onClick={onLinkClick} className="h-100">
+                                <img className="mw-100 h-100 d-inline-block" src={`${product.productImages[0]['url']}`} alt="Product Image"></img>                     
                             </Link>
                             
                         </div>

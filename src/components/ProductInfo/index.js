@@ -5,14 +5,15 @@ import ButtonAddToCart from "../ButtonAddToCart";
 import RatingStar from "../RatingStar";
 import ProductDetail from "../ProductDetail";
 
-function ProductInfo(){
+function ProductInfo({product}){
+    console.log(product);
     const [showDetail, setShowDetail] = useState(false);
         return (
         <>
             <div className="container-fluid pt-5">
                 <div className="row">
-                    <div className="d-flex col-lg-6 col-md-6 align-items-center justify-content-center">
-                        <img className="mw-100 mb-4" src="https://cdn.techzones.vn/Data/Sites/1/News/4358/techzones-tim-hieu-nhung-diem-noi-bat-cua-apple-macbook-pro-14.png" alt="Product Image" />
+                    <div className="d-flex h-100 col-lg-6 col-md-6 align-items-center justify-content-center" >
+                        <img className="mw-100 mb-4 " src={`${product.productImages[0]['url']}`} alt="Product Image" />
                     </div>
 
                     <div className="info col-lg-6 col-md-6">
