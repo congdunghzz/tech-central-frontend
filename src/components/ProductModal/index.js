@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 
 import * as productService from "../../services/productService";
 
-function ProductModal({data, setProductItem}) {
+function ProductModal({data, setProduct}) {
 
 
     const [formData, setFormData] = useState(data);
@@ -10,7 +10,6 @@ function ProductModal({data, setProductItem}) {
 
     const [images, setImages] = useState([]);
 
-    console.log("modal: re-render" );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,9 +44,10 @@ function ProductModal({data, setProductItem}) {
                 }else if (res.err) {
                     alert(res.err);
                 } else {
-                    alert('updated successfully');
                     setFormData(res.data);
-                    setProductItem(res.data);
+                    alert('updated successfully');
+                    console.log(res.data);
+                    setProduct(res.data);
                 }
             }
 

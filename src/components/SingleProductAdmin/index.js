@@ -7,7 +7,9 @@ import ProductModal from "../ProductModal";
 function SingleProductAdmin(product) {
     const data = product.product;
     const [productItem, setProductItem] = useState(data)
-    console.log("re-render");
+    const reRenderProduct = (product) => {
+        setProductItem(product);
+    };
     return (
         < >
             <tr key={data.id}>
@@ -29,7 +31,7 @@ function SingleProductAdmin(product) {
                 <button className="btn btn-secondary ms-auto" type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop-${productItem.id}`} >---</button>
 
             </tr>
-            <ProductModal data={data} setProductItem = {setProductItem}/>
+            <ProductModal data={productItem} setProduct = {reRenderProduct}/>
         </>
     );
 
