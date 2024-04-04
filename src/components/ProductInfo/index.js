@@ -29,7 +29,7 @@ function ProductInfo({product}){
                         </div>
                     </div>
                     <div className="info col-lg-6 col-md-6">
-                        <h3>MacBook Pro</h3>
+                        <h3>{product.name}</h3>
                         <RatingStar/>
                         <h4 className="fst-italic text-primary me-2 pt-3 ">{`$${product.price}`}</h4>
                         <table className="mt-2">

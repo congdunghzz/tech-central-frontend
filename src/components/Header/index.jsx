@@ -9,7 +9,7 @@ function Header () {
 
     return (
         <>
-            <div className="d-flex container-fluid header-container border-bottom position-fixed bg-light shadow  mb-5 bg-white rounded" >
+            <div className="d-flex container-fluid header-container border-bottom position-fixed bg-light shadow  mb-5 bg-white rounded px-5" >
                 <div className="me-auto logo d-flex justify-content-center align-items-center">
                     <Link to={"/"} className="text-dark text-decoration-none">
                         <p className="font-weight-bold" style={{fontWeight:"700", fontSize:"1.8rem"}}>Tech Central</p>

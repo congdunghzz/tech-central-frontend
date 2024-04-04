@@ -12,7 +12,7 @@ function SingleProductAdmin(product) {
             <tr key={data.id}>
                 <td>
                     <div className="basic-info">
-                        <Link to="/product/productId/" className="text-decoration-none text-dark">
+                        <Link to={`/product/${data.id}`} className="text-decoration-none text-dark">
                             {data.productImages[0] ?
                                 (<img className="mh-100" src={`${data.productImages[0]['url']}`} alt="Product image"></img>)
                                 :
