@@ -19,6 +19,7 @@ function AdminCategory() {
 
     };
 
+
     const onInputChange = (e) => {
         const name = e.target.value;
         setCategory(prevData => ({
@@ -30,6 +31,27 @@ function AdminCategory() {
     const closeModalClick = () => {
         
         setCategory(initCategory);
+    };
+    console.log(categories);
+
+    const reRenderCategories = (inputCategory) => {
+        const newCategories = categories.map((item) => {
+            
+            if (item.id === inputCategory.id) {
+                return { ...item, name: inputCategory.name }; 
+            }
+            return item; 
+        });   
+        setCategories(newCategories);
+
+    };
+
+    const reRenderDeleteCategories = (id) => {
+        const newCategories = categories.filter(item => {
+            return item.id !== id;
+        })
+        
+        setCategories(newCategories);
     };
 
 
@@ -48,6 +70,7 @@ function AdminCategory() {
                     alert(res.message);
                 } else {
                     setCategory(res.data);
+                    setCategories([...categories, res.data]);
                     alert('updated successfully');
                 }
             }
@@ -115,7 +138,7 @@ function AdminCategory() {
                     </div>
                 {
                     categories.map(category => (
-                        <CategoryModal category = {category}/>
+                        <CategoryModal data = {category} reRenderUpdateCategories ={reRenderCategories} reRenderDeleteCategories ={reRenderDeleteCategories}/>
                     ))
                 }
 

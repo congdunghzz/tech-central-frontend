@@ -39,7 +39,7 @@ function ProductAdmin() {
     }
 
 
-
+    
     const getAllCategories = async () => {
         const { data } = await categoryService.getCategories();
         setCategories(data);
@@ -120,6 +120,7 @@ function ProductAdmin() {
         if (window.confirm('Save Product')) {
 
             saveProduct();
+            // setProductList([...productList, formData]);
         }
 
     }

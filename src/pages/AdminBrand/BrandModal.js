@@ -2,9 +2,8 @@ import { useState } from "react";
 
 import * as brandService from "../../services/brandService";
 
-function BrandModal(props) {
-
-    const data = props.brand;
+function BrandModal({data, reRenderUpdateBrand, reRenderDeleteBrand}) {
+    console.log(data);
     const [brand, setBrand] = useState(data);
     const onInputChange = (e) => {
         const name = e.target.value;
@@ -29,6 +28,7 @@ function BrandModal(props) {
                 } else {
                     setBrand(res.data);
                     alert('updated successfully');
+                    reRenderUpdateBrand(res.data);
                 }
             }
         }
@@ -39,7 +39,13 @@ function BrandModal(props) {
 
             const res = await brandService.deleteBrand(data.id);
 
-            console.log(res);
+            if (res.code) {
+                alert(res.message);
+            } else {
+                setBrand(res.data);
+                alert('delete successfully');
+                reRenderDeleteBrand(brand.id);
+            }
         }
     }
 
@@ -64,7 +70,7 @@ function BrandModal(props) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeModalClick}>Close</button>
-                        <button type="button" className="btn btn-danger" onClick={deleteBrand}>Delete</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={deleteBrand}>Delete</button>
                         <button type="button" className="btn btn-primary" onClick={saveBrand}>Save</button>
                     </div>
                 </div>

@@ -32,6 +32,25 @@ function AdminBrand() {
         setBrand(initBrand);
     };
 
+    const reRenderUpdateBrand = (inputCategory) => {
+        const newBrands = brands.map((item) => {
+            
+            if (item.id === inputCategory.id) {
+                return { ...item, name: inputCategory.name }; 
+            }
+            return item; 
+        });   
+        setBrands(newBrands);
+
+    };
+
+    const reRenderDeleteBrand = (id) => {
+        const newBrands = brands.filter(item => {
+            return item.id !== id;
+        })
+        
+        setBrands(newBrands);
+    };
 
     useEffect(() => {
         getAllBrand();
@@ -49,6 +68,7 @@ function AdminBrand() {
                 } else {
                     setBrand(res.data);
                     alert('updated successfully');
+                    setBrands([...brands, res.data]);
                 }
             }
         }
@@ -115,7 +135,7 @@ function AdminBrand() {
                     </div>
                 {
                     brands.map(brand => (
-                        <BrandModal brand = {brand}/>
+                        <BrandModal data = {brand} reRenderDeleteBrand = {reRenderDeleteBrand} reRenderUpdateBrand={reRenderUpdateBrand}/>
                     ))
                 }
 

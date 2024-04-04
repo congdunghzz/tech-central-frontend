@@ -2,15 +2,15 @@ import { useState, useRef } from "react";
 
 import * as productService from "../../services/productService";
 
-function ProductModal(data = {}) {
+function ProductModal({data, setProductItem}) {
 
-    data = data.data;
 
     const [formData, setFormData] = useState(data);
     const [showImageInput, setShowImageInput] = useState(false);
 
     const [images, setImages] = useState([]);
 
+    console.log("modal: re-render" );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,9 +45,9 @@ function ProductModal(data = {}) {
                 }else if (res.err) {
                     alert(res.err);
                 } else {
-                    setFormData(res.data);
                     alert('updated successfully');
-
+                    setFormData(res.data);
+                    setProductItem(res.data);
                 }
             }
 
@@ -96,7 +96,7 @@ function ProductModal(data = {}) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1 className="modal-title fs-5" id="exampleModalLabel">{data.name}</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]) }}></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]); setShowImageInput(false) }}></button>
                     </div>
                     <div className="modal-body container-fluid row">
                         <div className="col-6">
@@ -155,7 +155,7 @@ function ProductModal(data = {}) {
                     </div>
                     <div className="modal-footer">
 
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]) }}>Close</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]); setShowImageInput(false) }}>Close</button>
 
                         <button type="button"
                             className="btn btn-danger"

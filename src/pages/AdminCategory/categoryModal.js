@@ -2,9 +2,10 @@ import { useState } from "react";
 
 import * as categoryService from "../../services/categoryService";
 
-function CategoryModal(props) {
+function CategoryModal({data, reRenderUpdateCategories, reRenderDeleteCategories}) {
 
-    const data = props.category;
+    // const data = props.category;
+    
     const [category, setCategory] = useState(data);
 
     const onInputChange = (e) => {
@@ -24,12 +25,13 @@ function CategoryModal(props) {
 
             if (window.confirm('Are you sure you want to save')) {
                 const res = await categoryService.updateCategory(data.id, category)
-                console.log(res);
+                console.log(res.data);
                 if (res.code) {
                     alert(res.message);
                 } else {
                     setCategory(res.data);
                     alert('updated successfully');
+                    reRenderUpdateCategories(res.data);
                 }
             }
         }
@@ -44,8 +46,9 @@ function CategoryModal(props) {
                 if (res.code) {
                     alert(res.message);
                 } else {
-                    setCategory(res.data);
+                    
                     alert('delete successfully');
+                    reRenderDeleteCategories(data.id);
                 }
         }
     }
@@ -71,7 +74,7 @@ function CategoryModal(props) {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={closeModalClick}>Close</button>
-                        <button type="button" className="btn btn-danger" onClick={deleteCategory}>Delete</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={deleteCategory}>Delete</button>
                         <button type="button" className="btn btn-primary" onClick={saveCategory}>Save</button>
                     </div>
                 </div>
