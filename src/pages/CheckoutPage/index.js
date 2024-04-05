@@ -114,8 +114,8 @@ function CheckOut(){
             <div className="my-5 px-5">
                 <div className="input-group w-75">
                     <span className="input-group-text">First and last name</span>
-                    <input type="text" aria-label="First name" className="form-control"/>
-                    <input type="text" aria-label="Last name" className="form-control"/>
+                    <input type="text" aria-label="First name" className="form-control"  />
+                    <input type="text" aria-label="Last name" className="form-control"  />
                 </div>
                 <div className="input-group mb-3 w-75 my-4">
                     <span className="input-group-text" id="inputGroup-sizing-default">Phone</span>

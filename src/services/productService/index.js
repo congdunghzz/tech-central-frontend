@@ -1,7 +1,7 @@
 import axios from "axios"
 
-import ApiUrl from "../../ApiUrl"
-
+import ApiUrl from "../../utils/ApiUrl"
+import authHeader from "../../utils/authHeader";
 
 
 
@@ -36,7 +36,10 @@ export async function postNewProduct(formData) {
 
         return await axios.post(`${ApiUrl}/product`, formData,
             {
-                headers: { 'Content-Type': `multipart/form-data` }
+                headers: { 
+                    'Content-Type': `multipart/form-data` ,
+                    ...authHeader()
+                }
             }
         );
     } catch (error) {
@@ -59,7 +62,7 @@ export async function updateProduct(productId, product) {
 
         return await axios.put(`${ApiUrl}/product/${productId}`, product,
             {
-                headers: { 'Content-Type': 'application/json' }
+                headers: { 'Content-Type': 'application/json', ...authHeader()}
             },
             { validateStatus: false }
         );
@@ -79,7 +82,10 @@ export async function updateProduct(productId, product) {
 
 }
 export async function deleteProduct(productId) {
-    return await axios.delete(`${ApiUrl}/product/${productId}`);
+    return await axios.delete(`${ApiUrl}/product/${productId}`, 
+    {
+        headers: authHeader()
+    });
 }
 
 

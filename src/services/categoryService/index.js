@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-import ApiUrl from "../../ApiUrl";
+import ApiUrl from "../../utils/ApiUrl";
 
 
 export async function getCategories() {
