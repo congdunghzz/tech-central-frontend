@@ -8,6 +8,7 @@ import "./adminOrder.css"
 function AdminOrder() {
     const navigate = useNavigate();
 
+    const [status, setStatus] = useState('');
     const [orderList, setOrderList] = useState([]);
     const [showingDetail, setShowingDetail] = useState(0);
 
@@ -28,9 +29,12 @@ function AdminOrder() {
 
     const orderStatuses = ['PROCESSING', 'SHIPPING', 'FINISHED', 'CANCELED'];
 
-
+    const handleStatusClick = (st) => {
+        setStatus(st);
+        
+    };
     const getAllOrders = async () => {
-        const res = await orderService.getAllOrders();
+        const res = await orderService.getAllOrders(status);
         console.log(res);
 
         if (res?.status === 403) {
@@ -51,23 +55,23 @@ function AdminOrder() {
 
     useEffect(() => {
         getAllOrders();
-    }, []);
+    }, [status]);
 
     return (
         <div className="row align-items-center d-flex ">
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <a className={`nav-link active`} href="#">All</a>
+                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('')}}>All</a>
                 </li>
 
                 <li className='nav-item'>
-                    <a className={`nav-link active`} href="#" >On Deliver</a>
+                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('SHIPPING')}} >On Deliver</a>
                 </li>
                 <li className='nav-item'>
-                    <a className={`nav-link active`} href="#" >Delivered</a>
+                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('FINISHED')}} >Delivered</a>
                 </li>
                 <li className='nav-item'>
-                    <a className={`nav-link active`} href="#" >Canceled</a>
+                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('CANCELED')}} >Canceled</a>
                 </li>
 
 
@@ -96,7 +100,7 @@ function AdminOrder() {
                                             <td>{order.orderDetails[0]['productName']},...</td>
                                             <td>{order.name}</td>
                                             <td>{order.orderDate}</td>
-                                            <td>{order.totalCost}</td>
+                                            <td>${order.totalCost}</td>
                                             <td>{order.orderStatus}</td>
                                         </tr>
                                         {showingDetail === order.id && (
@@ -130,9 +134,9 @@ function AdminOrder() {
                                                             <tbody>
                                                                 <tr>
                                                                     <td>{order.orderDetails[0]['productName']}</td>
-                                                                    <td>{order.orderDetails[0]['productPrice']}</td>
+                                                                    <td>${order.orderDetails[0]['productPrice']}</td>
                                                                     <td>{order.orderDetails[0]['amount']}</td>
-                                                                    <td>{order.orderDetails[0]['cost']}</td>
+                                                                    <td>${order.orderDetails[0]['cost']}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

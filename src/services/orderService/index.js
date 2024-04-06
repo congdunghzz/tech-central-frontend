@@ -3,9 +3,9 @@ import ApiUrl from "../../utils/ApiUrl";
 import authHeader from "../../utils/authHeader";
 
 
-export async function getAllOrders() {
+export async function getAllOrders(status) {
     try{
-        const response = await axios.get(`${ApiUrl}/order`, {
+        const response = await axios.get(`${ApiUrl}/order?status=${status}`, {
             headers: {
                 'Content-Type' : 'application/json',
                 ...authHeader(),
