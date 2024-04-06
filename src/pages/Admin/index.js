@@ -5,6 +5,7 @@ import ProductList from "../../components/ProductList";
 import ProductAdmin from "../ProductAdmin";
 import AdminCategory from "../AdminCategory";
 import AdminBrand from "../AdminBrand";
+import AdminOrder from "../AdminOrder";
 
 
 function Admin() {
@@ -33,6 +34,7 @@ function Admin() {
                     {tab == "Products" && <ProductAdmin />}
                     {tab == "Categories" && <AdminCategory />}
                     {tab == "Brand" && <AdminBrand />}
+                    {tab == "Orders" && < AdminOrder/>}
                 </div>
             </div>
         </div>

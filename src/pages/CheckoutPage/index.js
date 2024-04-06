@@ -114,26 +114,29 @@ function CheckOut(){
             <div className="my-5 px-5">
                 <div className="input-group w-75">
                     <span className="input-group-text">First and last name</span>
-                    <input type="text" aria-label="First name" className="form-control"  />
-                    <input type="text" aria-label="Last name" className="form-control"  />
+                    <input type="text" aria-label="First name" className="form-control"/>
+                    <input type="text" aria-label="Last name" className="form-control"/>
                 </div>
                 <div className="input-group mb-3 w-75 my-4">
                     <span className="input-group-text" id="inputGroup-sizing-default">Phone</span>
                     <input type="number" className="form-control" aria-label="Sizing example input"/>
                 </div>
                 <div className="input-group ">
-                    <span className="input-group-text">Address</span>
+                    <span className="input-group-text">Address</span> 
                     <select type="text" aria-label="First name" className="form-control" onChange={(e) => {setProvince(e.target.value)}}>
+                        <option value=''>Tỉnh / Thành Phố</option>
                         {provinces.map(item => (
                             <option key={item.province_id} value={item.province_id}>{item.province_name}</option>
                         ))}
                     </select>
                     <select type="text" aria-label="Last name" className="form-control"  onChange={e => { setDistrict(e.target.value)}}>
+                        <option value=''>Quận / Huyện</option>
                         {districts.map(item => (
                             <option key={item.district_id} value={item.district_id}>{item.district_name}</option>
                         ))}
                     </select>
                     <select type="text" aria-label="Last name" className="form-control" onChange={e => { setWard(e.target.value)}}>
+                        <option value=''>Phường / Xã</option>
                         {wards.map(item => (
                             <option key={item.ward_id} value={item.ward_id}>{item.ward_name}</option>
                         ))}
