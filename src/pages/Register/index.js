@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import * as authenticationService from "../../services/authenticationService"
@@ -14,7 +14,7 @@ function Register() {
         dob: '',
         phone: '',
     };
-
+    const navigate = useNavigate();
     const [registerRequest, setRegisterRequest] = useState(initRegisterRequest);
     const onChangeRequest = (e) => {
         setRegisterRequest(prev => ({
@@ -32,6 +32,7 @@ function Register() {
         console.log(res);
         if (res?.status === 200) {
             console.log("register successfully");
+            navigate("/");
         } else if (res?.status >= 400 && res?.status < 500) {
             alert(res.data.message);
         }

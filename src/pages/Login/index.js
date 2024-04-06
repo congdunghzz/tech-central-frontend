@@ -1,10 +1,11 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import * as authenticationService from "../../services/authenticationService";
 import "./Login.css"
 function Login() {
 
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,6 +23,7 @@ function Login() {
         const res = await authenticationService.login(loginRequest)
         if(res.status === 200){
             console.log("login successfully");
+            navigate("/");
         } else if(res?.status === 403){
             setPassword('');
             alert("Email or password is incorrect");

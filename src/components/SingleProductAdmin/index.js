@@ -1,18 +1,22 @@
 
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 
 import ProductModal from "../ProductModal";
 
-function SingleProductAdmin(product) {
-    const data = product.product;
-    const [productItem, setProductItem] = useState(data)
+function SingleProductAdmin({product}) {
+    
+    const [productItem, setProductItem] = useState(product)
+    
     const reRenderProduct = (product) => {
         setProductItem(product);
     };
+    useEffect(() => {
+        setProductItem(product);
+    }, [product]);
     return (
-        < >
-            <tr key={data.id}>
+        <>
+            <tr key={product.id}>
                 <td>
                     <div className="basic-info">
                         <Link to={`/product/${productItem.id}`} className="text-decoration-none text-dark">
@@ -31,6 +35,7 @@ function SingleProductAdmin(product) {
                 <button className="btn btn-secondary ms-auto" type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop-${productItem.id}`} >---</button>
 
             </tr>
+            {console.log(productItem.name)}
             <ProductModal data={productItem} setProduct = {reRenderProduct}/>
         </>
     );

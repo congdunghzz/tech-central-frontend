@@ -1,10 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import * as productService from "../../services/productService";
 
 function ProductModal({data, setProduct}) {
-
-
     const [formData, setFormData] = useState(data);
     const [showImageInput, setShowImageInput] = useState(false);
 
@@ -31,6 +29,9 @@ function ProductModal({data, setProduct}) {
         }
     };
 
+    useEffect(() => {
+        setFormData(data);
+    }, [data]);
 
     const handleSaveClick = async () => {
         if (JSON.stringify(data) != JSON.stringify(formData)) {

@@ -87,6 +87,7 @@ function ProductAdmin() {
 
     }
 
+    console.log(productList);
 
 
 
@@ -204,6 +205,7 @@ function ProductAdmin() {
                         </thead>
                         <tbody>
                             {
+                                
                                 productList ? productList.map(product => (<SingleProductAdmin product={product} />))
                                     :
                                     (<div className="d-flex align-items-center justify-content-center">
