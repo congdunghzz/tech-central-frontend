@@ -61,17 +61,17 @@ function AdminOrder() {
         <div className="row align-items-center d-flex ">
             <ul className="nav nav-tabs">
                 <li className="nav-item">
-                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('')}}>All</a>
+                    <a className={`nav-link  ${status === ''? 'active' : ''}`} href="#" onClick={() => {handleStatusClick('')}}>All</a>
                 </li>
 
                 <li className='nav-item'>
-                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('SHIPPING')}} >On Deliver</a>
+                    <a className={`nav-link  ${status === 'SHIPPING'? 'active' : ''}`} href="#" onClick={() => {handleStatusClick('SHIPPING')}} >On Deliver</a>
                 </li>
                 <li className='nav-item'>
-                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('FINISHED')}} >Delivered</a>
+                    <a className={`nav-link  ${status === 'FINISHED'? 'active' : ''}`} href="#" onClick={() => {handleStatusClick('FINISHED')}} >Delivered</a>
                 </li>
                 <li className='nav-item'>
-                    <a className={`nav-link active`} href="#" onClick={() => {handleStatusClick('CANCELED')}} >Canceled</a>
+                    <a className={`nav-link  ${status === 'CANCELED'? 'active' : ''}`} href="#" onClick={() => {handleStatusClick('CANCELED')}} >Canceled</a>
                 </li>
 
 
