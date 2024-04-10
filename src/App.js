@@ -12,6 +12,7 @@ import Admin from './pages/Admin';
 import Register from './pages/Register';
 import UserProfile from './pages/UserProfile';
 import UnAuthorized from './pages/UnAuthorized';
+import UserOrder from './pages/UserOrders';
 function App() {
 
   const authToken = window.localStorage.getItem('authToken');

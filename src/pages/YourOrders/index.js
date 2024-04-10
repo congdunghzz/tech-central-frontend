@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import UserOrder from "../UserOrders";
 
 
 function YourOrders () {
@@ -17,31 +17,7 @@ function YourOrders () {
                 </div>
             </div>
             <hr/>
-            <table className="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Total Cost</th>
-                    <th scope="col">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mr.Loiper</td>
-                    <td>3691616743</td>
-                    <td>$2800</td>
-                    <td>2022-07-01</td>
-                </tr>
-                <tr>
-                    <td>Jacob</td>
-                    <td>3691616743</td>
-                    <td>$1200</td>
-                    <td >2024-04-01</td>
-                </tr>
-                
-            </tbody>
-            </table>
+            <UserOrder></UserOrder>
         </div>
     );
 
