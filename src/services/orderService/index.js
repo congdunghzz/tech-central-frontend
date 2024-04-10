@@ -16,3 +16,17 @@ export async function getAllOrders(status) {
         return error.response;
     }
 }
+
+export async function getMyOrders() {
+    try{
+        const response = await axios.get(`${ApiUrl}/order/myOrders`, {
+            headers: {
+                'Content-Type' : 'application/json',
+                ...authHeader(),
+            },
+        });
+        return response;
+    }catch(error) {
+        return error.response;
+    }
+}

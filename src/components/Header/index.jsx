@@ -1,8 +1,10 @@
-import "./header.css"
 import { Link } from "react-router-dom";
+import "./header.css"
 
 function Header () {
 
+    const isAuthenticated = window.localStorage.getItem("authToken");
+    
     // const appearInRoot = async() => {
         
     // };
@@ -29,6 +31,22 @@ function Header () {
                             Cart
                         </button>
                     </Link>
+
+                    { 
+                    isAuthenticated ? 
+                    (<Link to="/profile">
+                        <button type="button" className="btn btn-outline-primary me-2">
+                            My Profile
+                        </button>
+                    </Link>) 
+                    : 
+                    (<Link to="/login">
+                        <button type="button" className="btn btn-outline-primary me-2">
+                            Login
+                        </button>
+                    </Link>) 
+                    }
+
                 </div>
             </div>
             <div className="placeholder"></div>

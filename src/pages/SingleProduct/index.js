@@ -64,6 +64,7 @@ function SingleProduct() {
      
         return (
             <>
+            
                 <Header />
                 <ProductInfo product={product}/>
                 <ProductList title={"Similar Products"} showingType={'col-xxl-3  col-lg-4 col-md-6'} products={similar}></ProductList>

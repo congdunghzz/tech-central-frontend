@@ -84,13 +84,14 @@ function Profile() {
     }, []);
 
     return (
-        <div className="row align-items-center d-flex px-5">
+
+        <div className="row align-items-center d-flex px-5 container">
             {
                 profile ? (
 
                     <div className="card px-5">
                         <div className="card-header mb-5">
-                            <h5 className="card-title text-center">Your Profile</h5>
+                            <h3 className="card-title text-center">My Profile</h3>
                         </div>
 
                         <div className="input-group mb-3">
@@ -100,9 +101,12 @@ function Profile() {
                                 name="name" value={profile.name}
                                 onChange={isEditing ? handleChange : null} />
                         </div>
+
+    {/* Bug : cant update gender field */}
+
                         <div className="input-group mb-3">
-                            <label className="input-group-text" for="inputGroupSelect01">Gender</label>
-                            <select className="form-select" id="inputGroupSelect01" disabled={!isEditing}>
+                            <label className="input-group-text" htmlFor="gender">Gender</label>
+                            <select className="form-select" id="gender" disabled={!isEditing} onChange={isEditing ? handleChange : null}>
                                 <option value="MALE" selected={profile.gender === 'MALE'}>Male</option>
                                 <option value="FEMALE" selected={profile.gender === "FEMALE"}>Female</option>
                                 <option value="OTHERS" selected={profile.gender === "OTHERS"}>Others</option>
@@ -119,8 +123,7 @@ function Profile() {
                             <span className="input-group-text" id="email">Email</span>
                             <input type="text" className="form-control"
                                 aria-label="Sizing example input" aria-describedby="email"
-                                name="email" value={profile.email}
-                                onChange={isEditing ? handleChange : null} />
+                                name="email" value={profile.email} disabled />
                         </div>
                         <div className="input-group mb-3">
                             <span className="input-group-text" id="phone">Phone</span>
@@ -149,7 +152,7 @@ function Profile() {
                     </div>
                 ) : (
                     <div className="d-flex justify-content-center align-items-center">
-                        <h1 className="text-center">NOT FOUND</h1>
+                        <h1 className="text-center">LOADING</h1>
                     </div>)
             }
 
