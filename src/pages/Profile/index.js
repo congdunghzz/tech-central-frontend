@@ -106,7 +106,7 @@ function Profile() {
 
                         <div className="input-group mb-3">
                             <label className="input-group-text" htmlFor="gender">Gender</label>
-                            <select className="form-select" id="gender" disabled={!isEditing} onChange={isEditing ? handleChange : null}>
+                            <select className="form-select" id="gender" name="gender" disabled={!isEditing} onChange={isEditing ? handleChange : null}>
                                 <option value="MALE" selected={profile.gender === 'MALE'}>Male</option>
                                 <option value="FEMALE" selected={profile.gender === "FEMALE"}>Female</option>
                                 <option value="OTHERS" selected={profile.gender === "OTHERS"}>Others</option>
