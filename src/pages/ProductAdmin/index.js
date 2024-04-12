@@ -33,14 +33,19 @@ function ProductAdmin() {
     const [brands, setBrands] = useState([]);
     const [brand, setBrand] = useState('');
 
-    const getProductList = async () => {
-        const { data } = await productService.getProducts();
-        console.log(data);
-        setProductList(data.content);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
+    const generatePageNumbers = () => {
+        let pages = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i);
+        }
+        return pages;
     }
 
 
-    
+
     const getAllCategories = async () => {
         const { data } = await categoryService.getCategories();
         setCategories(data);
@@ -52,9 +57,10 @@ function ProductAdmin() {
     }
 
     const getProductsByCategoryAndBrand = async () => {
-        const { data } = await productService.getProductsByCategoryAndBrand(category, brand);
+        const { data } = await productService.getProductsByCategoryAndBrand(category, brand, currentPage, 8);
         console.log(data);
         setProductList(data.content);
+        setTotalPages(data.totalPages);
     }
 
     // save product
@@ -130,12 +136,22 @@ function ProductAdmin() {
 
     const labelCategoryClick = (categoryName) => {
         setCategory(categoryName);
+        setCurrentPage(1);
+
     }
 
     const handleBrandClick = (brandName) => {
         setBrand(brandName);
+        setCurrentPage(1);
+
     }
 
+    const changePageClick = (page) => {
+        if (page > totalPages || page < 1) {
+            return;
+        }
+        setCurrentPage(page);
+    }
     useEffect(() => {
         getAllCategories();
     }, [])
@@ -145,14 +161,14 @@ function ProductAdmin() {
     }, [])
 
     useEffect(() => {
-        getProductList();
+        getProductsByCategoryAndBrand();
     }, []);
 
 
     useEffect(() => {
         getProductsByCategoryAndBrand();
 
-    }, [category, brand]);
+    }, [category, brand, currentPage]);
 
     return (
 
@@ -193,7 +209,7 @@ function ProductAdmin() {
                     <div className=" r-0 mt-5">
                         <button type="button" className="btn btn-success btn-lg ms-auto r-0" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Product</button>
                     </div>
-                    
+
                     <table className="table table-hover ms-3 mt-5">
                         <thead>
                             <tr>
@@ -207,18 +223,44 @@ function ProductAdmin() {
                         </thead>
                         <tbody>
                             {
-                                
+
                                 productList ? productList.map(product => (<SingleProductAdmin product={product} />))
                                     :
                                     (<div className="d-flex align-items-center justify-content-center">
                                         <h2>
-                                        This filter have no product
+                                            This filter have no product
                                         </h2>
                                     </div>)
                             }
 
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example text-center">
+                        <div className="d-flex justify-content-center w-100 my-4">
+
+                            <ul className="pagination">
+                                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                    <a className="page-link" href="#"
+                                        onClick={() => { changePageClick(currentPage - 1) }}>Previous</a>
+                                </li>
+                                {
+                                    generatePageNumbers().map(i => (
+                                        <li key={i}
+                                            className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                                            <a className="page-link" href="#"
+                                                onClick={() => { changePageClick(i) }}>{i}</a>
+                                        </li>
+                                    ))
+                                }
+
+                                <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}
+                                >
+                                    <a className="page-link" href="#"
+                                        onClick={() => { changePageClick(currentPage + 1) }}>Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
 
                 </>)
 

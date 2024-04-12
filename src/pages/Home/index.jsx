@@ -7,7 +7,7 @@ import ProductList from "../../components/ProductList";
 import Banner from "../../components/Banner";
 import Categories from "../../components/Categories";
 import { getCategories } from "../../services/categoryService";
-import { getProducts } from "../../services/productService";
+import { getProducts, getNewProduct } from "../../services/productService";
 
 function Home () {
     const [ categories, setCategories] = useState([]);
@@ -23,6 +23,11 @@ function Home () {
         console.log(data);
         setProductList(data.content);
     }
+    const getNew = async () => {
+        const { data } = await getNewProduct(8);
+        console.log(data);
+        setProductList(data);
+    }
     useEffect( () => {
         getAllCategories();
     }, []);
@@ -32,7 +37,7 @@ function Home () {
     }, []);
 
     useEffect( () => {
-        getProductList();
+        getNew();
     }, []);
 
     // home page == col-xxl-3  col-lg-4 col-md-6

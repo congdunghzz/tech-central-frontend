@@ -10,7 +10,11 @@ export async function getProducts() {
 }
 
 export async function getProductsByCategory(categoryName, page, size) {
-    return await axios.get(`${ApiUrl}/product/category?name=${categoryName}` );
+    return await axios.get(`${ApiUrl}/product/category?name=${categoryName}&page=${page}&size=${size}` );
+}
+
+export async function getNewProduct(size) {
+    return await axios.get(`${ApiUrl}/product/newProduct?size=${size}` );
 }
 
 export async function getProductsByCategoryAndBrand(category, brand, page, size) {
@@ -18,6 +22,15 @@ export async function getProductsByCategoryAndBrand(category, brand, page, size)
         params: {
             category,
             brand,
+            page,
+            size
+        }
+    });
+}
+export async function searchForName(key, page, size) {
+    return await axios.get(`${ApiUrl}/product/search`, {
+        params: {
+            key,
             page,
             size
         }

@@ -20,7 +20,7 @@ function Header () {
                 <div className="w-50 align-items-center">
                     <div style={{height :"60px", display:"flex", justifyContent:"center"}}>
                         <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" style={{ width:"50%"}}>
-                            <input type="search" className="form-control form-control-dark " placeholder="Search..." aria-label="Search"/>
+                            <input type="search" className="form-control form-control-dark " placeholder="Search for product..." aria-label="Search"/>
                         </form>
                     </div>
                     

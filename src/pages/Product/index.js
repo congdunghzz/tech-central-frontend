@@ -4,9 +4,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
-import { getProducts, getProductsByCategoryAndBrand } from "../../services/productService";
+import { getProductsByCategoryAndBrand } from "../../services/productService";
 
-function Product() {
+function Product(props) {
 
     const [productList, setProductList] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -35,11 +35,7 @@ function Product() {
         setBrands(data);
     }
 
-    const getProductList = async () => {
-        const { data } = await getProducts();
-        setProductList(data.content);
-        setTotalPages(data.totalPages);
-    }
+  
 
     const getAllProductsByCategoryAndBrand = async () => {
         const { data } = await getProductsByCategoryAndBrand(category, brand, currentPage, 9);
@@ -49,13 +45,18 @@ function Product() {
 
     const labelCategoryClick = (categoryName) => {
         setCategory(categoryName);
+        setCurrentPage(1);
     }
 
     const handleBrandClick = (brandName) => {
         setBrand(brandName);
+        setCurrentPage(1);
     }
 
     const changePageClick = (page) => {
+        if (page > totalPages || page < 1) {
+            return;
+        }
         setCurrentPage(page);
     }
 
