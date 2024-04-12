@@ -38,7 +38,7 @@ function SingleProduct() {
 
     const getAllProducts = async ()=>{
         const {data} = await getProductsByCategoryAndBrand(product.category, product.brand);
-        setSimilar(data);
+        setSimilar(data.content);
     }
 
     useEffect(() => {

@@ -35,7 +35,8 @@ function ProductAdmin() {
 
     const getProductList = async () => {
         const { data } = await productService.getProducts();
-        setProductList(data);
+        console.log(data);
+        setProductList(data.content);
     }
 
 
@@ -52,7 +53,8 @@ function ProductAdmin() {
 
     const getProductsByCategoryAndBrand = async () => {
         const { data } = await productService.getProductsByCategoryAndBrand(category, brand);
-        setProductList(data);
+        console.log(data);
+        setProductList(data.content);
     }
 
     // save product

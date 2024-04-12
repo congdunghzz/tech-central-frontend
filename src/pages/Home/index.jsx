@@ -16,12 +16,12 @@ function Home () {
     const getAllCategories = async () => {
         const {data} = await getCategories();
         setCategories(data);
-        console.log(data);
     };
 
     const getProductList = async () => {
         const { data } = await getProducts();
-        setProductList(data);
+        console.log(data);
+        setProductList(data.content);
     }
     useEffect( () => {
         getAllCategories();
