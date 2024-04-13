@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { SearchContext } from "../../context/searchContext";
 import "./header.css"
 
@@ -15,6 +15,9 @@ function Header() {
             navigate("/product");
         }
     }
+    useEffect(() =>{
+        setSearchInput(searchContext.searchInput.trim())
+    }, [searchContext.searchInput]);
 
     return (
         <>

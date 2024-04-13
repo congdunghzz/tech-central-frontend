@@ -30,7 +30,7 @@ function ProductCart ( {key, showingType, product} ) {
                         <div className="px-4 d-flex align-items-center pt-3 pb-3">
                             <h4 className="fst-italic text-primary me-4">{`$${product.price}`}</h4>
                             <div className="ms-4">
-                                <ButtonAddToCart name={"ADD TO CART"}/> 
+                                <ButtonAddToCart product={product}/> 
                             </div>
                         </div>
                     </div>
