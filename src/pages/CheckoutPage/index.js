@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProvinces, getDistrict, getWard } from "../../components/api/Province";
-import Cart from "../Cart";
-function CheckOut({ product }) {
-
+function CheckOut() {
+    const location = useLocation()
+    const product = location.state;
     const defaultProvince = {
         province_id: "0",
         province_name: " Thành Phố",
@@ -36,9 +36,27 @@ function CheckOut({ product }) {
     const [wardName, setWardName] = useState('');
     const [address, setAddress] = useState('');
 
+    const [itemList, setItemList] = useState([]);
+
+    let cart = JSON.parse(window.localStorage.getItem("cart")) || [];
+
+
+    const total = itemList.reduce((sum, item) => (sum + item.price * item.amount),0);
     useEffect(() => {
         setAddress(wardName + ", " + districtName + ", " + provinceName);
     }, [provinceName, districtName, wardName]);
+
+
+    useEffect(() => {
+        console.log(product);
+        if (product) {
+            setItemList([product])
+        } else {
+            setItemList(cart);
+        }
+    }, [])
+
+
     useEffect(() => {
 
         const fetchData = async () => {
@@ -105,16 +123,21 @@ function CheckOut({ product }) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>MacBook Pro</td>
-                            <td>$1500</td>
-                            <td>2</td>
-                        </tr>
+                        {
+                            itemList.map((item, index) => (
+                                <tr key={index}>
+                                    <th scope="row">{index +1}</th>
+                                    <td>{item.name}</td>
+                                    <td>${item.price}</td>
+                                    <td>{item.amount}</td>
+                                </tr>
+                            ))
+                        }
+
                         <tr>
                             <th scope="row"></th>
-                            <td colSpan="2">Total:</td>
-                            <td>$3000</td>
+                            <td colSpan="2">total:</td>
+                            <td>${total}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -175,7 +198,7 @@ function CheckOut({ product }) {
 
             <div className="d-grid gap-2 col-4 mx-auto">
                 <Link to="/orders" className="w-100">
-                    <button className="btn btn-primary w-100" type="button">Finish</button>
+                    <button className="btn btn-primary w-100" type="button">Complete</button>
                 </Link>
             </div>
         </div>
