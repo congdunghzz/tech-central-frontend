@@ -55,11 +55,13 @@ function Product() {
     const labelCategoryClick = (categoryName) => {
         setCategory(categoryName);
         setCurrentPage(1);
+        searchContext.setSearchInput('');
     }
 
     const handleBrandClick = (brandName) => {
         setBrand(brandName);
         setCurrentPage(1);
+        searchContext.setSearchInput('');
     }
 
     const changePageClick = (page) => {
@@ -81,21 +83,20 @@ function Product() {
         getAllBrand();
     }, []);
 
+    
+
+
+    
+
     useEffect(() => {
+        console.log("second render");
+        
         if (searchContext.searchInput.length > 2){
             getProductByKeySearch(searchContext.searchInput);
         }else{
             getAllProductsByCategoryAndBrand();
         }
-    }, [searchContext.searchInput]);
-
-
-    useEffect(() => {
-        getAllProductsByCategoryAndBrand();
-
-    }, [category, brand, currentPage]);
-
-
+    }, [searchContext.searchInput, category, brand, currentPage]);
 
 
     return (

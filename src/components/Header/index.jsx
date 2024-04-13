@@ -5,7 +5,7 @@ import "./header.css"
 
 function Header() {
     const searchContext = useContext(SearchContext);
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState(searchContext.searchInput.trim());
     const isAuthenticated = window.localStorage.getItem("authToken");
     const navigate = useNavigate();
 
