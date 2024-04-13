@@ -28,9 +28,10 @@ function Cart() {
                         <h4>Total cost: ${totalPrice}</h4>
                     </div>
                     <div className="d-grid gap-2 col-4 ms-auto">
+                        { cart.length > 0 &&
                         <Link to="/checkout" className="w-100">
                             <button className="btn btn-primary w-100" type="button">Checkout</button>
-                        </Link>
+                        </Link>}
 
                     </div>
                 </div>
