@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProvinces, getDistrict, getWard } from "../../components/api/Province";
 import Cart from "../Cart";
-function CheckOut(){
+function CheckOut({ product }) {
 
     const defaultProvince = {
         province_id: "0",
@@ -14,7 +14,7 @@ function CheckOut(){
         district_id: "0",
         district_name: " Quận / huyện",
         district_type: "Quận",
-        province_id:"0"
+        province_id: "0"
     }
     const defaultWard = {
         district_id: "0",
@@ -31,7 +31,15 @@ function CheckOut(){
     const [district, setDistrict] = useState(defaultDistrict);
     const [ward, setWard] = useState(defaultWard);
 
-    useEffect(() =>{
+    const [provinceName, setProvinceName] = useState('');
+    const [districtName, setDistrictName] = useState('');
+    const [wardName, setWardName] = useState('');
+    const [address, setAddress] = useState('');
+
+    useEffect(() => {
+        setAddress(wardName + ", " + districtName + ", " + provinceName);
+    }, [provinceName, districtName, wardName]);
+    useEffect(() => {
 
         const fetchData = async () => {
             try {
@@ -44,13 +52,14 @@ function CheckOut(){
         fetchData();
     }, []);
 
-    useEffect(() =>{
+
+    useEffect(() => {
 
         const fetchData = async () => {
             try {
                 const data = await getDistrict(province);
                 setDistricts(data.results);
-                
+
             } catch (error) {
                 console.error("Error fetching provinces:", error);
             }
@@ -58,12 +67,12 @@ function CheckOut(){
         fetchData();
     }, [province]);
 
-    useEffect(() =>{
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const data = await getWard(district);
                 setWards(data.results);
-                
+
             } catch (error) {
                 console.error("Error fetching provinces:", error);
             }
@@ -114,35 +123,53 @@ function CheckOut(){
             <div className="my-5 px-5">
                 <div className="input-group w-75">
                     <span className="input-group-text">First and last name</span>
-                    <input type="text" aria-label="First name" className="form-control"/>
-                    <input type="text" aria-label="Last name" className="form-control"/>
+                    <input type="text" aria-label="First name" className="form-control" />
+                    <input type="text" aria-label="Last name" className="form-control" />
                 </div>
                 <div className="input-group mb-3 w-75 my-4">
                     <span className="input-group-text" id="inputGroup-sizing-default">Phone</span>
-                    <input type="number" className="form-control" aria-label="Sizing example input"/>
+                    <input type="number" className="form-control" aria-label="Sizing example input" />
                 </div>
                 <div className="input-group ">
-                    <span className="input-group-text">Address</span> 
-                    <select type="text" aria-label="First name" className="form-control" onChange={(e) => {setProvince(e.target.value)}}>
+                    <span className="input-group-text">Address</span>
+                    <select type="text" aria-label="First name"
+                        className="form-control" value={province.province_name}
+                        onChange={(e) => {
+                            setProvince(e.target.value);
+                            setProvinceName(e.target.options[e.target.selectedIndex].text);
+                            setDistrictName('');
+                            setWardName('');
+                        }}>
                         <option value=''>Tỉnh / Thành Phố</option>
                         {provinces.map(item => (
                             <option key={item.province_id} value={item.province_id}>{item.province_name}</option>
                         ))}
                     </select>
-                    <select type="text" aria-label="Last name" className="form-control"  onChange={e => { setDistrict(e.target.value)}}>
+                    <select type="text" aria-label="Last name"
+                        className="form-control" value={district.district_name}
+                        onChange={e => {
+                            setDistrict(e.target.value)
+                            setDistrictName(e.target.options[e.target.selectedIndex].text);
+                            setWardName('');
+                        }}>
                         <option value=''>Quận / Huyện</option>
                         {districts.map(item => (
                             <option key={item.district_id} value={item.district_id}>{item.district_name}</option>
                         ))}
                     </select>
-                    <select type="text" aria-label="Last name" className="form-control" onChange={e => { setWard(e.target.value)}}>
+                    <select type="text" aria-label="Last name"
+                        className="form-control" value={ward.ward_name}
+                        onChange={e => {
+                            setWard(e.target.value);
+                            setWardName(e.target.options[e.target.selectedIndex].text);
+                        }}>
                         <option value=''>Phường / Xã</option>
                         {wards.map(item => (
                             <option key={item.ward_id} value={item.ward_id}>{item.ward_name}</option>
                         ))}
-                        
+
                     </select>
-                    <input type="text" aria-label="First name" className="form-control" placeholder="Street name and house number"/>
+                    <input type="text" aria-label="First name" className="form-control" placeholder="Street name and house number" />
                 </div>
             </div>
 
