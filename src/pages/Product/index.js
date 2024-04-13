@@ -1,12 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import ProductList from "../../components/ProductList";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { getCategories } from "../../services/categoryService";
 import { getBrands } from "../../services/brandService";
-import { getProductsByCategoryAndBrand } from "../../services/productService";
+import { getProductsByCategoryAndBrand, searchForName } from "../../services/productService";
+import { SearchContext } from "../../context/searchContext";
 
-function Product(props) {
+function Product() {
+
+    const searchContext = useContext(SearchContext);
 
     const [productList, setProductList] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -43,6 +46,12 @@ function Product(props) {
         setTotalPages(data.totalPages);
     }
 
+    const getProductByKeySearch = async (keySearch) => {
+        const { data } = await searchForName(keySearch ,currentPage, 9);
+        setProductList(data.content);
+        setTotalPages(data.totalPages);
+    }
+
     const labelCategoryClick = (categoryName) => {
         setCategory(categoryName);
         setCurrentPage(1);
@@ -73,8 +82,12 @@ function Product(props) {
     }, []);
 
     useEffect(() => {
-        getAllProductsByCategoryAndBrand();
-    }, []);
+        if (searchContext.searchInput.length > 2){
+            getProductByKeySearch(searchContext.searchInput);
+        }else{
+            getAllProductsByCategoryAndBrand();
+        }
+    }, [searchContext.searchInput]);
 
 
     useEffect(() => {
