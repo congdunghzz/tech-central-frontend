@@ -65,7 +65,7 @@ function Register() {
                     <br />
                     <input type="text" className="w-100 h-100"
                         id="name" placeholder="Enter your password"
-                        name="name" value={registerRequest.name.trim()}
+                        name="name" value={registerRequest.name}
                         onChange={onChangeRequest} />
                 </div>
                 <div class="input-group mb-3">

@@ -63,7 +63,9 @@ function AdminOrder() {
                 <li className="nav-item">
                     <a className={`nav-link  ${status === '' ? 'active' : ''}`} href="#" onClick={() => { handleStatusClick('') }}>All</a>
                 </li>
-
+                <li className='nav-item'>
+                    <a className={`nav-link  ${status === 'PROCESSING' ? 'active' : ''}`} href="#" onClick={() => { handleStatusClick('PROCESSING') }} >On Process</a>
+                </li>
                 <li className='nav-item'>
                     <a className={`nav-link  ${status === 'SHIPPING' ? 'active' : ''}`} href="#" onClick={() => { handleStatusClick('SHIPPING') }} >On Deliver</a>
                 </li>

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 
 import * as productService from "../../services/productService";
 
-function ProductModal({data, setProduct}) {
+function ProductModal({ data, setProduct }) {
     const [formData, setFormData] = useState(data);
     const [showImageInput, setShowImageInput] = useState(false);
 
     const [images, setImages] = useState([]);
+    const [previewList, setPreviewList] = useState([]);
 
 
     const handleChange = (e) => {
@@ -29,6 +30,11 @@ function ProductModal({data, setProduct}) {
         }
     };
 
+    const handleXPreview = (index) => {
+        let newImageList = images.filter((_, i) => i !== index);
+        setImages(newImageList);
+    };
+
     useEffect(() => {
         setFormData(data);
     }, [data]);
@@ -39,10 +45,10 @@ function ProductModal({data, setProduct}) {
             if (window.confirm('Are you sure you want to save')) {
 
                 const res = await productService.updateProduct(data.id, formData)
-                
+
                 if (res.code) {
                     alert(res.message);
-                }else if (res.err) {
+                } else if (res.err) {
                     alert(res.err);
                 } else {
                     setFormData(res.data);
@@ -89,6 +95,16 @@ function ProductModal({data, setProduct}) {
 
     }
 
+    const showPreview = () => {
+        const files = images;
+        files.forEach(file => (file.previewUrl = URL.createObjectURL(file)));
+        setPreviewList(files);
+    }
+
+    useEffect(() => {
+        showPreview();
+    }, [images]);
+
 
     return (
 
@@ -103,7 +119,7 @@ function ProductModal({data, setProduct}) {
                         <div className="col-6">
                             <div className="input-group pe-2 mb-5">
                                 <span className="input-group-text" id="inputGroup-sizing-default">ID</span>
-                                <input type="text" className="form-control" aria-label="Sizing example input" value={data.id} readOnly disabled/>
+                                <input type="text" className="form-control" aria-label="Sizing example input" value={data.id} readOnly disabled />
                             </div>
                             <div className="input-group pe-2 mb-5">
                                 <span className="input-group-text" id="inputGroup-sizing-default">Name</span>
@@ -169,10 +185,35 @@ function ProductModal({data, setProduct}) {
                         <button type="button" className="btn btn-info" onClick={() => { setShowImageInput(!showImageInput) }}>Import images</button>
                     </div>
 
-                    { showImageInput && (<div className="input-group mb-3">
-                        <input type="file" className="form-control" id="inputGroupFile02" multiple name="images" onChange={(e) => {onChangeImageInput(e)}}/>
-                        <button className="btn btn-outline-success" onClick={() => {handleImportImagesBtn()}}>Upload</button>
-                    </div>)}
+                    {showImageInput &&
+                        (
+                            <>
+                                <div className="input-group mb-3">
+                                    <input type="file" className="form-control" id="inputGroupFile02" multiple name="images" onChange={(e) => { onChangeImageInput(e) }} />
+                                    <button className="btn btn-outline-success" onClick={() => { handleImportImagesBtn() }}>Upload</button>
+                                </div>
+                                
+                                {previewList.length > 0 &&
+                                    (<div className="preview-list d-flex thumb-list align-items-center ps-5 mb-3">
+        
+                                        {
+                                            previewList.map((previewItem, index) => (
+                                                (<div key={index} className="h-100 position-relative ms-3">
+                                                    <img className="h-100" src={previewItem.previewUrl} />
+                                                    <span
+                                                        className="x-preview position-absolute top-0 start-100 translate-middle badge rounded-pill text-reset"
+                                                        onClick={() => handleXPreview(index)}>
+                                                        X
+                                                    </span>
+                                                </div>)
+                                            ))
+                                        }
+        
+                                    </div>)
+                                }
+                            </>
+                        )
+                    }
                 </div>
             </div>
 

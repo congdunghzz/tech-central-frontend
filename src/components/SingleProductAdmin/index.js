@@ -35,7 +35,7 @@ function SingleProductAdmin({product}) {
                 <button className="btn btn-secondary ms-auto" type="button" data-bs-toggle="modal" data-bs-target={`#staticBackdrop-${productItem.id}`} >---</button>
 
             </tr>
-            {console.log(productItem.name)}
+            
             <ProductModal data={productItem} setProduct = {reRenderProduct}/>
         </>
     );

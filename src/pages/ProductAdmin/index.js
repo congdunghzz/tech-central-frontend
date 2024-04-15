@@ -4,7 +4,7 @@ import * as productService from "../../services/productService";
 import * as categoryService from "../../services/categoryService";
 import * as brandService from "../../services/brandService";
 
-
+import "./productAdmin.css"
 export const initProduct = {
     "name": "",
     "price": '',
@@ -36,6 +36,8 @@ function ProductAdmin() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
+    const [previewList, setPreviewList] = useState([]);
+
     const generatePageNumbers = () => {
         let pages = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -58,7 +60,6 @@ function ProductAdmin() {
 
     const getProductsByCategoryAndBrand = async () => {
         const { data } = await productService.getProductsByCategoryAndBrand(category, brand, currentPage, 8);
-        console.log(data);
         setProductList(data.content);
         setTotalPages(data.totalPages);
     }
@@ -95,13 +96,13 @@ function ProductAdmin() {
 
     }
 
-    console.log(productList);
+
 
 
 
     const handleImageChange = (event) => {
         const selectedImages = Array.from(event.target.files);
-        setImages(selectedImages);
+        setImages(images.concat(selectedImages));
     };
 
 
@@ -125,6 +126,12 @@ function ProductAdmin() {
         }
     };
 
+    const showPreview = () => {
+        const files = images;
+        files.forEach(file => (file.previewUrl = URL.createObjectURL(file)));
+        setPreviewList(files);
+    }
+
     const handleSaveClick = () => {
         if (window.confirm('Save Product')) {
 
@@ -132,6 +139,15 @@ function ProductAdmin() {
             // setProductList([...productList, formData]);
         }
 
+    }
+    const handleXPreview = (index) => {
+        let newImageList = images.filter((_, i) => i !== index);
+        setImages(newImageList);
+    };
+
+    const handleCloseClick = () => {
+        setFormData(initProduct);
+        setImages([]);
     }
 
     const labelCategoryClick = (categoryName) => {
@@ -152,6 +168,10 @@ function ProductAdmin() {
         }
         setCurrentPage(page);
     }
+    useEffect(() => {
+        showPreview();
+    }, [images]);
+
     useEffect(() => {
         getAllCategories();
     }, [])
@@ -271,7 +291,7 @@ function ProductAdmin() {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">New Product</h1>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(initProduct) }}></button>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseClick}></button>
                         </div>
                         <div className="modal-body container-fluid row">
                             <div className="col-6">
@@ -331,8 +351,28 @@ function ProductAdmin() {
                         <div className="input-group mb-3">
                             <input type="file" className="form-control" accept="image/png, image/jpeg" name="images" multiple onChange={(e) => { handleImageChange(e) }} />
                         </div>
+
+                        {previewList.length > 0 &&
+                            (<div className="preview-list d-flex thumb-list align-items-center ps-5 mb-3">
+
+                                {
+                                    previewList.map((previewItem, index) => (
+                                        (<div key={index} className="h-100 position-relative ms-3">
+                                            <img className="h-100" src={previewItem.previewUrl} />
+                                            <span
+                                                className="x-preview position-absolute top-0 start-100 translate-middle badge rounded-pill text-reset"
+                                                onClick={() => handleXPreview(index)}>
+                                                X
+                                            </span>
+                                        </div>)
+                                    ))
+                                }
+
+                            </div>)
+                        }
+
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseClick}>Close</button>
 
                             <button type="button" className="btn btn-primary" onClick={() => { handleSaveClick() }}>Add New</button>
                         </div>
