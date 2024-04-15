@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { getMyOrders } from "../../services/orderService";
+import { getMyOrders, cancelOrder, finishOrder } from "../../services/orderService";
 
 
 function UserOrder() {
@@ -19,6 +19,43 @@ function UserOrder() {
         setShowingDetail(orderId);
     }
 
+
+    const handleCancelClick = async (orderId) => {
+        if (!window.confirm('Are you sure you want')) return;
+        const res = await cancelOrder(orderId);
+        console.log(res);
+        if (res?.status === 403) {
+            alert("You need to login");
+            navigate('/login');
+            return
+        }
+        if (res?.status !== 403 && res?.status >= 400 && res?.status < 500) {
+            alert(res.data.message);
+            return
+        }
+        if (res?.status >= 500) {
+            alert("Something went wrong on server side");
+            return
+        }
+        getAllOrders();
+    }
+    const handleFinishOrderClick = async (orderId) => {
+        const res = await cancelOrder(orderId);
+        if (res?.status === 403) {
+            alert("You need to login");
+            navigate('/login');
+            return
+        }
+        if (res?.status !== 403 && res?.status >= 400 && res?.status < 500) {
+            alert(res.data.message);
+            return
+        }
+        if (res?.status >= 500) {
+            alert("Something went wrong on server side");
+            return
+        }
+        getAllOrders();
+    }
 
     const getAllOrders = async () => {
         const res = await getMyOrders();
@@ -116,7 +153,13 @@ function UserOrder() {
                                                             </tbody>
                                                         </table>
                                                         {order.orderStatus === 'PROCESSING' &&
-                                                            <button className="btn btn-danger">Cancel this order</button>
+                                                            <button className="btn btn-danger" onClick={() => {handleCancelClick(order.id)}}>Cancel This Order</button>
+                                                        }
+                                                        {order.orderStatus === 'CANCELED' &&
+                                                            <button className="btn btn-secondary" disabled>Canceled</button>
+                                                        }
+                                                        {order.orderStatus === 'SHIPPING' &&
+                                                            <button className="btn btn-success" onClick={() => {handleFinishOrderClick(order.id)}}>I Have Received The Goods</button>
                                                         }
                                                     </div>
                                                 </td>

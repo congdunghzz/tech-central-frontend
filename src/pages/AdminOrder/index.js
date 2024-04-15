@@ -150,6 +150,7 @@ function AdminOrder() {
                                                         <select type="text" aria-label="First name" className="form-control w-25" onChange={changeStatus}>
                                                             <option value={order.orderStatus}>{order.orderStatus}</option>
                                                             {
+                                                                order.orderStatus !== 'CANCELED' &&
                                                                 orderStatuses
                                                                     .filter(status => status !== order.orderStatus)
                                                                     .map((status, index) => (

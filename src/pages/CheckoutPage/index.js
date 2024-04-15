@@ -172,7 +172,7 @@ function CheckOut() {
                             <th scope="col">#</th>
                             <th scope="col">Product name</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Amount</th>
+                            <th scope="col">Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,7 +189,7 @@ function CheckOut() {
 
                         <tr>
                             <th scope="row"></th>
-                            <td colSpan="2">total:</td>
+                            <td colSpan="2"><b>Total:</b></td>
                             <td>${total}</td>
                         </tr>
                     </tbody>

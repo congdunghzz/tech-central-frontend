@@ -9,13 +9,25 @@ function Header() {
     const isAuthenticated = window.localStorage.getItem("authToken");
     const navigate = useNavigate();
 
+    const [cartItemQuantity, setCartItemQuantity] = useState(0);
     const onInputEnter = (e) => {
         if (e.key === 'Enter') {
             searchContext.setSearchInput(searchInput.trim());
             navigate("/product");
         }
     }
-    useEffect(() =>{
+
+    useEffect(()=>{
+        const cart = JSON.parse(window.localStorage.getItem("cart"));
+        if (cart){
+            const quantity = cart.length;
+            setCartItemQuantity(quantity);
+        }else{
+            setCartItemQuantity(0);
+        }
+    })
+
+    useEffect(() => {
         setSearchInput(searchContext.searchInput.trim())
     }, [searchContext.searchInput]);
 
@@ -34,7 +46,7 @@ function Header() {
                                 className="form-control form-control-dark "
                                 placeholder="Search for product..." aria-label="Search"
                                 value={searchInput}
-                                onChange={(e) => {setSearchInput(e.target.value)}}
+                                onChange={(e) => { setSearchInput(e.target.value) }}
                                 onKeyDown={onInputEnter} />
                         </div>
                     </div>
@@ -42,8 +54,11 @@ function Header() {
                 </div>
                 <div className="h-100 mb-auto ms-auto logo d-flex justify-content-center align-items-center">
                     <Link to="/cart">
-                        <button type="button" className="btn btn-outline-danger me-2">
-                            Cart
+                        <button type="button" className="btn btn-primary position-relative me-2">
+                            Cart 
+                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger">
+                                {cartItemQuantity}
+                            </span>
                         </button>
                     </Link>
 

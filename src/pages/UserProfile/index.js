@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Profile from "../Profile";
 import UserOrder from "../UserOrders";
+import Header from "../../components/Header";
 
 function UserProfile() {
     const [tab, setTab] = useState('Profile');
@@ -12,6 +13,7 @@ function UserProfile() {
 
     return (    
         <div className="container-fluid mt-5">
+            <Header/>
             <div className="row ">
                 <div className="col-lg-2 mb-5">
                     <div className="  ps-4 list-group list-group-flush justify-content-center" role="tablist">

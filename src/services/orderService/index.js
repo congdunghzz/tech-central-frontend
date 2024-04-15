@@ -44,3 +44,30 @@ export async function createOrder(request) {
         return error.response;
     }
 }
+
+export async function cancelOrder(id) {
+    try{
+        const response = await axios.put(`${ApiUrl}/order/${id}/status`, 'CANCELED', {
+            headers: {
+                'Content-Type' : 'application/json',
+                ...authHeader(),
+            },
+        });
+        return response;
+    }catch(error) {
+        return error.response;
+    }
+}
+export async function finishOrder(id) {
+    try{
+        const response = await axios.put(`${ApiUrl}/order/${id}/status`,'FINISH', {
+            headers: {
+                'Content-Type' : 'application/json',
+                ...authHeader(),
+            },
+        });
+        return response;
+    }catch(error) {
+        return error.response;
+    }
+}
