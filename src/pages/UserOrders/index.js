@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import {getMyOrders} from "../../services/orderService";
+import { getMyOrders } from "../../services/orderService";
 
 
 function UserOrder() {
@@ -22,7 +22,7 @@ function UserOrder() {
 
     const getAllOrders = async () => {
         const res = await getMyOrders();
-        console.log(res);
+       
 
         if (res?.status === 403) {
             alert("You need to login");
@@ -101,15 +101,21 @@ function UserOrder() {
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>{order.orderDetails[0]['productName']}</td>
-                                                                    <td>${order.orderDetails[0]['productPrice']}</td>
-                                                                    <td>{order.orderDetails[0]['amount']}</td>
-                                                                    <td>${order.orderDetails[0]['cost']}</td>
-                                                                </tr>
+
+                                                                {
+                                                                    order.orderDetails.map((detail) => (
+                                                                        <tr>
+                                                                            <td>{detail['productName']}</td>
+                                                                            <td>${detail['productPrice']}</td>
+                                                                            <td>{detail['amount']}</td>
+                                                                            <td>${detail['cost']}</td>
+                                                                        </tr>
+                                                                    ))
+                                                                }
+
                                                             </tbody>
                                                         </table>
-                                                        { order.orderStatus === 'PROCESSING' &&
+                                                        {order.orderStatus === 'PROCESSING' &&
                                                             <button className="btn btn-danger">Cancel this order</button>
                                                         }
                                                     </div>

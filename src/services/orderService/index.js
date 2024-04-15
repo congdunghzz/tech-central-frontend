@@ -30,3 +30,17 @@ export async function getMyOrders() {
         return error.response;
     }
 }
+
+export async function createOrder(request) {
+    try{
+        const response = await axios.post(`${ApiUrl}/order`, request, {
+            headers: {
+                'Content-Type' : 'application/json',
+                ...authHeader(),
+            },
+        });
+        return response;
+    }catch(error) {
+        return error.response;
+    }
+}
