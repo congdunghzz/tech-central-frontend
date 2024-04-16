@@ -60,7 +60,21 @@ export async function cancelOrder(id) {
 }
 export async function finishOrder(id) {
     try{
-        const response = await axios.put(`${ApiUrl}/order/${id}/status`,'FINISH', {
+        const response = await axios.put(`${ApiUrl}/order/${id}/status`,'FINISHED', {
+            headers: {
+                'Content-Type' : 'application/json',
+                ...authHeader(),
+            },
+        });
+        return response;
+    }catch(error) {
+        return error.response;
+    }
+}
+
+export async function acceptOrder(id) {
+    try{
+        const response = await axios.put(`${ApiUrl}/order/${id}/status`,'SHIPPING', {
             headers: {
                 'Content-Type' : 'application/json',
                 ...authHeader(),

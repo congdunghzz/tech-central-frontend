@@ -108,7 +108,28 @@ export async function importImages(productId, formData) {
 
     try {
         return await axios.post(`${ApiUrl}/product/${productId}/image`, formData , {
-            headers: { 'Content-Type': 'multipart/form-data'}
+            headers: { 'Content-Type': 'multipart/form-data', ...authHeader()}
+        });
+    } catch (error) {
+        if (error.response.data.statusCode >= 400) {
+            return {
+                code: error.response.data.statusCode,
+                message: error.response.data.message
+            };
+        } else {
+            return {
+                code: 500,
+                message: "An error occurred while updating the product."
+            }
+        }
+    }
+
+}
+export async function deleteImages(productId, images) {
+    console.log(images);
+    try {
+        return await axios.delete(`${ApiUrl}/product/${productId}/image`, {data: images} , {
+            headers: { 'Content-Type': 'application/json', ...authHeader()},
         });
     } catch (error) {
         if (error.response.data.statusCode >= 400) {

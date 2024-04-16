@@ -39,8 +39,9 @@ function UserOrder() {
         }
         getAllOrders();
     }
+
     const handleFinishOrderClick = async (orderId) => {
-        const res = await cancelOrder(orderId);
+        const res = await finishOrder(orderId);
         if (res?.status === 403) {
             alert("You need to login");
             navigate('/login');
@@ -160,6 +161,9 @@ function UserOrder() {
                                                         }
                                                         {order.orderStatus === 'SHIPPING' &&
                                                             <button className="btn btn-success" onClick={() => {handleFinishOrderClick(order.id)}}>I Have Received The Goods</button>
+                                                        }
+                                                        {order.orderStatus === 'FINISHED' &&
+                                                            <button className="btn btn-success me-3" disabled>Finished</button>
                                                         }
                                                     </div>
                                                 </td>

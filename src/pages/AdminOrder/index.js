@@ -21,21 +21,72 @@ function AdminOrder() {
         setShowingDetail(orderId);
     }
 
-    const changeStatus = (e) => {
-        if (window.confirm("Change the order status to " + e.target.value)) {
-
+    const handleCancelOrder = async (orderId) => {
+        if (!window.confirm('Are you sure you want')) return;
+        const res = await orderService.cancelOrder(orderId);
+        console.log(res);
+        if (res?.status === 403) {
+            alert("You need to login");
+            navigate('/login');
+            return
         }
+        if (res?.status !== 403 && res?.status >= 400 && res?.status < 500) {
+            alert(res.data.message);
+            return
+        }
+        if (res?.status >= 500) {
+            alert("Something went wrong on server side");
+            return
+        }
+        getAllOrders();
     }
 
-    const orderStatuses = ['PROCESSING', 'SHIPPING', 'FINISHED', 'CANCELED'];
+    const handleFinishOrder = async (orderId) => {
+        if (!window.confirm('You have received the order')) return;
+        const res = await orderService.finishOrder(orderId);
+        if (res?.status === 403) {
+            alert("You need to login");
+            navigate('/login');
+            return
+        }
+        if (res?.status !== 403 && res?.status >= 400 && res?.status < 500) {
+            alert(res.data.message);
+            return
+        }
+        if (res?.status >= 500) {
+            alert("Something went wrong on server side");
+            return
+        }
+        getAllOrders();
+    }
 
+    const handleAcceptOrder = async (orderId) => {
+        if (!window.confirm('Are you sure you want')) return;
+        const res = await orderService.acceptOrder(orderId);
+        console.log(res);
+        if (res?.status === 403) {
+            alert("You need to login");
+            navigate('/login');
+            return
+        }
+        if (res?.status !== 403 && res?.status >= 400 && res?.status < 500) {
+            alert(res.data.message);
+            return
+        }
+        if (res?.status >= 500) {
+            alert("Something went wrong on server side");
+            return
+        }
+        getAllOrders();
+    }
+
+    
     const handleStatusClick = (st) => {
         setStatus(st);
 
     };
     const getAllOrders = async () => {
         const res = await orderService.getAllOrders(status);
-        console.log(res);
 
         if (res?.status === 403) {
             alert("You need to login");
@@ -147,17 +198,23 @@ function AdminOrder() {
                                                             </tbody>
                                                         </table>
 
-                                                        <select type="text" aria-label="First name" className="form-control w-25" onChange={changeStatus}>
-                                                            <option value={order.orderStatus}>{order.orderStatus}</option>
-                                                            {
-                                                                order.orderStatus !== 'CANCELED' &&
-                                                                orderStatuses
-                                                                    .filter(status => status !== order.orderStatus)
-                                                                    .map((status, index) => (
-                                                                        <option key={index} value={status}>{status}</option>
-                                                                    ))
-                                                            }
-                                                        </select>
+
+
+                                                        {order.orderStatus !== 'CANCELED' && order.orderStatus !== 'FINISH' &&
+                                                            <button className="btn btn-danger me-3" onClick={() => {handleCancelOrder(order.id)}}>Cancel This Order</button>
+                                                        }
+                                                        {order.orderStatus === 'PROCESSING' &&
+                                                            <button className="btn btn-success me-3" onClick={() => {handleAcceptOrder(order.id)}}>Accept</button>
+                                                        }
+                                                        {order.orderStatus === 'CANCELED' &&
+                                                            <button className="btn btn-secondary me-3" disabled>Canceled</button>
+                                                        }
+                                                        {order.orderStatus === 'SHIPPING' &&
+                                                            <button className="btn btn-success me-3" onClick={() => { handleFinishOrder(order.id)}}>Finish</button>
+                                                        }
+                                                        {order.orderStatus === 'FINISHED' &&
+                                                            <button className="btn btn-success me-3" disabled>Finished</button>
+                                                        }
                                                     </div>
                                                 </td>
                                             </tr>

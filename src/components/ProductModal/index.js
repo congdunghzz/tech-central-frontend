@@ -38,15 +38,15 @@ function ProductModal({ data, setProduct }) {
     };
 
     const handleCloseModal = () => {
-        setFormData(data); 
-        setImages([]); 
-        setShowImageInput(false); 
+        setFormData(data);
+        setImages([]);
+        setShowImageInput(false);
         setDeletedImages([]);
         setProductImages(data.productImages);
     };
 
     const handleXImage = (index) => {
-        if(!window.confirm("Are you sure you want to delete this image")) return;
+        if (!window.confirm("Are you sure you want to delete this image")) return;
         const isDuplicate = deletedImages.some(image => {
             return image.id === productImages[index].id;
         })
@@ -97,18 +97,35 @@ function ProductModal({ data, setProduct }) {
     };
 
     const handleImportImagesBtn = async () => {
-        console.log(images);
+        console.log('imported images' + images);
+        console.log('deleted images' + deletedImages);
+
         let formData = new FormData();
 
         images.forEach(image => {
             formData.append('images', image);
         })
 
-        if (window.confirm('Import images ??')) {
-
-            const res = (await productService.importImages(data.id, formData)).data;
-            console.log(res);
-            setImages([])
+        if (window.confirm('Import / delete all images selected ??')) {
+            console.log(images.length);
+            if (images.length > 0) {
+                const res = (await productService.importImages(data.id, formData));
+                if (res?.message) {
+                    alert(res.message);
+                } else {
+                    alert('Import images successfully');
+                }
+                setImages([]);
+            }
+            if (deletedImages.length > 0) {
+                const res2 = await productService.deleteImages(data.id, deletedImages);
+                console.log(res2);
+                if (res2?.message) {
+                    alert(res2.message);
+                } else {
+                    alert('Delete images successfully');
+                }
+            }
         }
     }
 
