@@ -12,11 +12,10 @@ import Admin from './pages/Admin';
 import Register from './pages/Register';
 import UserProfile from './pages/UserProfile';
 import UnAuthorized from './pages/UnAuthorized';
-import UserOrder from './pages/UserOrders';
 function App() {
 
   const authToken = window.localStorage.getItem('authToken');
-
+  const role = window.localStorage.getItem('role');
   return (
     <>
       <Routes>
@@ -27,12 +26,11 @@ function App() {
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/checkout" element={< Checkout/>} />
 
-        
-        <Route path="/checkout" element={authToken ? (<Checkout />) : (< UnAuthorized/>)} />
         <Route path="/orders" element={authToken? (<YourOrders />) : (< UnAuthorized/>)} />
         <Route path="/profile" element={authToken ? (<UserProfile />) : (< UnAuthorized/>)} />
-        <Route path="/admin" element={authToken ? (<Admin /> ) : (< UnAuthorized/>)} />
+        <Route path="/admin" element={authToken && role ==='ADMIN' ? (<Admin /> ) : (< UnAuthorized/>)} />
       </Routes>
 
     </>

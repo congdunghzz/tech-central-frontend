@@ -9,6 +9,8 @@ function ProductModal({ data, setProduct }) {
     const [images, setImages] = useState([]);
     const [previewList, setPreviewList] = useState([]);
 
+    const [productImages, setProductImages] = useState(data.productImages);
+    const [deletedImages, setDeletedImages] = useState([]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,6 +36,27 @@ function ProductModal({ data, setProduct }) {
         let newImageList = images.filter((_, i) => i !== index);
         setImages(newImageList);
     };
+
+    const handleCloseModal = () => {
+        setFormData(data); 
+        setImages([]); 
+        setShowImageInput(false); 
+        setDeletedImages([]);
+        setProductImages(data.productImages);
+    };
+
+    const handleXImage = (index) => {
+        if(!window.confirm("Are you sure you want to delete this image")) return;
+        const isDuplicate = deletedImages.some(image => {
+            return image.id === productImages[index].id;
+        })
+        if (!isDuplicate) {
+            setDeletedImages([...deletedImages, productImages[index]]);
+            const newProductImages = [...productImages]
+            newProductImages.splice(index, 1);
+            setProductImages(newProductImages);
+        }
+    }
 
     useEffect(() => {
         setFormData(data);
@@ -94,12 +117,12 @@ function ProductModal({ data, setProduct }) {
         setImages(selectedImages);
 
     }
-
     const showPreview = () => {
         const files = images;
         files.forEach(file => (file.previewUrl = URL.createObjectURL(file)));
         setPreviewList(files);
     }
+
 
     useEffect(() => {
         showPreview();
@@ -113,7 +136,7 @@ function ProductModal({ data, setProduct }) {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h1 className="modal-title fs-5" id="exampleModalLabel">{data.name}</h1>
-                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]); setShowImageInput(false) }}></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseModal}></button>
                     </div>
                     <div className="modal-body container-fluid row">
                         <div className="col-6">
@@ -172,7 +195,7 @@ function ProductModal({ data, setProduct }) {
                     </div>
                     <div className="modal-footer">
 
-                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={() => { setFormData(data); setImages([]); setShowImageInput(false) }}>Close</button>
+                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close" onClick={handleCloseModal}>Close</button>
 
                         <button type="button"
                             className="btn btn-danger"
@@ -192,10 +215,28 @@ function ProductModal({ data, setProduct }) {
                                     <input type="file" className="form-control" id="inputGroupFile02" multiple name="images" onChange={(e) => { onChangeImageInput(e) }} />
                                     <button className="btn btn-outline-success" onClick={() => { handleImportImagesBtn() }}>Upload</button>
                                 </div>
-                                
+                                {
+                                    productImages.length > 0 && (
+                                        <div className="preview-list d-flex thumb-list align-items-center ps-5 mb-3">
+                                            {
+                                                productImages.map((image, index) => (
+                                                    <div key={index} className="h-100 position-relative ms-3">
+                                                        <img className="h-100" src={image.url} />
+                                                        <span
+                                                            className="x-preview position-absolute top-0 start-100 translate-middle badge rounded-pill text-reset"
+                                                            onClick={() => handleXImage(index)}>
+                                                            X
+                                                        </span>
+                                                    </div>
+                                                ))
+                                            }
+
+                                        </div>
+                                    )
+                                }
+
                                 {previewList.length > 0 &&
                                     (<div className="preview-list d-flex thumb-list align-items-center ps-5 mb-3">
-        
                                         {
                                             previewList.map((previewItem, index) => (
                                                 (<div key={index} className="h-100 position-relative ms-3">
@@ -208,7 +249,7 @@ function ProductModal({ data, setProduct }) {
                                                 </div>)
                                             ))
                                         }
-        
+
                                     </div>)
                                 }
                             </>

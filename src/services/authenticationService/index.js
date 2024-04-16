@@ -18,6 +18,7 @@ export async function login(loginRequest) {
             })
         if (response?.status === 200) {
             localStorage.setItem('authToken', response.data.token);
+            localStorage.setItem('role', response.data.role);
         }
         return response;
     } catch(e){
@@ -32,6 +33,7 @@ export async function register(request) {
         })
         if (response?.status === 200) {
             localStorage.setItem('authToken', response.data.token);
+            localStorage.setItem('role', response.data.role);
         }
         return response;
 

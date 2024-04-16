@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getProvinces, getDistrict, getWard } from "../../components/api/Province";
 import { createOrder } from "../../services/orderService";
 function CheckOut() {
+
+    
     const location = useLocation()
     const product = location.state;
 
@@ -49,6 +51,9 @@ function CheckOut() {
     let cart = JSON.parse(window.localStorage.getItem("cart")) || [];
     const navigate = useNavigate();
 
+
+    const authToken = window.localStorage.getItem("authToken");
+    
     const total = itemList.reduce((sum, item) => (sum + item.price * item.amount), 0);
     useEffect(() => {
         setAddress(street + ', ' +wardName + ", " + districtName + ", " + provinceName);
@@ -100,6 +105,13 @@ function CheckOut() {
         }
     };
 
+    useEffect(() => {
+        if (!authToken) {
+            if(window.confirm("Please login to make the order")){
+                navigate('/login');
+            }else navigate('/');
+        }
+    },[])
     useEffect(() => {
         
         if (product) {
