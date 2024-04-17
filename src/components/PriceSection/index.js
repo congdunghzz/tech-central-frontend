@@ -9,7 +9,7 @@ function PriceSection () {
                 <div className='row h-100'>
                     <div className='col-lg-6 h-100 align-items-center d-flex bg-image'>
                         <img 
-                            src='https://shopify-xrh7.onrender.com/hero.png' className=' h-100 p-0 mw-100' style={{backgroundImage: "#fff"}}></img>
+                            src='hero.png' className=' h-100 p-0 mw-100' style={{backgroundImage: "#fff"}}></img>
                     </div>
 
                     <div className='col-lg-6 align-items-center d-flex justify-content-center'>

@@ -1,17 +1,20 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { CartItemQuantityContext } from "../../context/cartItemQuantity";
 import CartItem from "../../components/CartItem";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "./Cart.css"
 function Cart() {
-
+    const cartItemQuantityContext = useContext(CartItemQuantityContext);
     let cart = JSON.parse(window.localStorage.getItem("cart")) || [];
     const [cartItems, setCartItems] = useState(cart);
 
     const totalPrice = cartItems.reduce((total, item) => (total + item.price * item.amount), 0);
     useEffect(() =>{
         window.localStorage.setItem("cart", JSON.stringify(cartItems));
+        cartItemQuantityContext.setQuantity(cartItems.length)
+        console.log(cartItems.length);
     }, [cartItems]);
 
     return (

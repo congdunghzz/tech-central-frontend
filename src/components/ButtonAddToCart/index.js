@@ -1,8 +1,11 @@
-
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import { CartItemQuantityContext } from "../../context/cartItemQuantity";
 import "./ButtonAddToCart.css"
 
 function ButtonAddToCart({ product }) {
 
+    const cartItemQuantityContext = useContext(CartItemQuantityContext);
     const addToCart = () => {
 
         let cart = JSON.parse(window.localStorage.getItem("cart")) || [];
@@ -12,16 +15,18 @@ function ButtonAddToCart({ product }) {
         if (existingProductIndex !== -1) {
             cart[existingProductIndex].amount += 1;
         } else {
-            cart.push({ 
-                productId: product.id, 
+            cart.push({
+                productId: product.id,
                 productImage: product.productImages[0]['url'],
                 name: product.name,
                 price: product.price,
-                amount: 1 
+                amount: 1
             });
-        }
+            cartItemQuantityContext.setQuantity(cartItemQuantityContext.quantity + 1);
 
+        }
         window.localStorage.setItem("cart", JSON.stringify(cart));
+        
     };
 
 

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {  } from "../../context/cartItemQuantity";
+
 import "./Cart.css"
 
 function CartItem({ item, cartItems, setCartItems }) {
@@ -17,30 +19,30 @@ function CartItem({ item, cartItems, setCartItems }) {
             case "MINUS":
                 if (amount <= 1) break;
                 changeProductAmountInStorage(amount - 1);
-                setAmount(amount - 1);  
+                setAmount(amount - 1);
         }
     }
 
-    const changeProductAmountInStorage = (quantity) =>{
+    const changeProductAmountInStorage = (quantity) => {
         const updatedCartItems = [...cartItems]
         const existingProductIndex = updatedCartItems.findIndex(i => i.productId === item.productId);
-        
-        if(existingProductIndex !== -1){
+
+        if (existingProductIndex !== -1) {
             updatedCartItems[existingProductIndex].amount = quantity;
             setCartItems(updatedCartItems);
         }
     }
 
-    const handleDeleteItem =() =>{
+    const handleDeleteItem = () => {
         const updatedCartItems = [...cartItems]
         const existingProductIndex = updatedCartItems.findIndex(i => i.productId === item.productId);
 
-        if(existingProductIndex !== -1){
+        if (existingProductIndex !== -1) {
             updatedCartItems.splice(existingProductIndex, 1);
             setCartItems(updatedCartItems);
         }
     }
-    
+
 
     return (
         <>

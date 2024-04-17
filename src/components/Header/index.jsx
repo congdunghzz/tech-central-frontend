@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { SearchContext } from "../../context/searchContext";
+import { CartItemQuantityContext } from "../../context/cartItemQuantity";
 import "./header.css"
 
 function Header() {
@@ -9,7 +10,9 @@ function Header() {
     const isAuthenticated = window.localStorage.getItem("authToken");
     const navigate = useNavigate();
 
-    const [cartItemQuantity, setCartItemQuantity] = useState(0);
+    
+    const cartItemQuantityContext = useContext(CartItemQuantityContext);
+    const [cartItemQuantity, setCartItemQuantity] = useState(cartItemQuantityContext.quantity);
     const onInputEnter = (e) => {
         if (e.key === 'Enter') {
             searchContext.setSearchInput(searchInput.trim());
@@ -17,14 +20,9 @@ function Header() {
         }
     }
 
-    useEffect(()=>{
-        const cart = JSON.parse(window.localStorage.getItem("cart"));
-        if (cart){
-            const quantity = cart.length;
-            setCartItemQuantity(quantity);
-        }else{
-            setCartItemQuantity(0);
-        }
+    useEffect(() => {
+        let cart = JSON.parse(window.localStorage.getItem("cart")) || [];
+        setCartItemQuantity(cart.length);
     })
 
     useEffect(() => {
