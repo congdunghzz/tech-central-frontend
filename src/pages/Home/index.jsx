@@ -20,12 +20,10 @@ function Home () {
 
     const getProductList = async () => {
         const { data } = await getProducts();
-        console.log(data);
         setProductList(data.content);
     }
     const getNew = async () => {
         const { data } = await getNewProduct(8);
-        console.log(data);
         setProductList(data);
     }
     useEffect( () => {

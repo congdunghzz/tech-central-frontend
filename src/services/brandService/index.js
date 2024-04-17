@@ -28,9 +28,11 @@ export async function postBrand(data) {
 
 export async function updateBrand(id, data) {
     try {
-        return await axios.put(`${ApiUrl}/brand/${id}`, data, {
+        const res = await axios.put(`${ApiUrl}/brand/${id}`, data, {
             headers: { 'Content-Type': 'application/json' }
         });
+        console.log(res);
+        return res;
     } catch (error) {
         if (error.response.data.statusCode >= 400) {
             return {

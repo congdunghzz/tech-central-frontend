@@ -24,7 +24,7 @@ function Cart() {
                     ))
                 }
                 <div className="mt-4">
-                    <div class="d-grid gap-2 col-4 ms-auto">
+                    <div className="d-grid gap-2 col-4 ms-auto">
                         <h4>Total cost: ${totalPrice}</h4>
                     </div>
                     <div className="d-grid gap-2 col-4 ms-auto">

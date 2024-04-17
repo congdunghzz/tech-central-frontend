@@ -98,8 +98,6 @@ function ProductAdmin() {
 
 
 
-
-
     const handleImageChange = (event) => {
         const selectedImages = Array.from(event.target.files);
         setImages(images.concat(selectedImages));

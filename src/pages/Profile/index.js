@@ -102,8 +102,6 @@ function Profile() {
                                 onChange={isEditing ? handleChange : null} />
                         </div>
 
-    {/* Bug : cant update gender field */}
-
                         <div className="input-group mb-3">
                             <label className="input-group-text" htmlFor="gender">Gender</label>
                             <select className="form-select" id="gender" name="gender" disabled={!isEditing} onChange={isEditing ? handleChange : null}>

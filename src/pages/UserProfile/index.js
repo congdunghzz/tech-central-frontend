@@ -12,6 +12,7 @@ function UserProfile() {
     }
     const logout = () =>{
         window.localStorage.removeItem('authToken');
+        window.localStorage.removeItem('role');
         navigate('/');
     }
 

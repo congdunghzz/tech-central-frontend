@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Categories from "../../components/Categories";
 import * as categoryService from "../../services/categoryService";
 import CategoryModal from "./categoryModal";
 
@@ -32,7 +31,6 @@ function AdminCategory() {
         
         setCategory(initCategory);
     };
-    console.log(categories);
 
     const reRenderCategories = (inputCategory) => {
         const newCategories = categories.map((item) => {
