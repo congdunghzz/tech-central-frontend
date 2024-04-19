@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 
 import * as productService from "../../services/productService";
 
-function ProductModal({ data, setProduct }) {
+
+function ProductModal({ data, setProduct, categories, brands }) {
     const [formData, setFormData] = useState(data);
     const [showImageInput, setShowImageInput] = useState(false);
 
@@ -11,6 +12,7 @@ function ProductModal({ data, setProduct }) {
 
     const [productImages, setProductImages] = useState(data.productImages);
     const [deletedImages, setDeletedImages] = useState([]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -61,6 +63,13 @@ function ProductModal({ data, setProduct }) {
     useEffect(() => {
         setFormData(data);
     }, [data]);
+
+    useEffect(() => {
+
+    }, []);
+    useEffect(() => {
+
+    }, []);
 
     const handleSaveClick = async () => {
         if (JSON.stringify(data) != JSON.stringify(formData)) {
@@ -170,12 +179,29 @@ function ProductModal({ data, setProduct }) {
                                 <input type="number" className="form-control" aria-label="Sizing example input" name="price" value={formData.price} onChange={(e) => { handleChange(e) }} />
                             </div>
                             <div className="input-group pe-2 mb-5">
-                                <span className="input-group-text" id="inputGroup-sizing-default">Brand</span>
-                                <input type="text" className="form-control" aria-label="Sizing example input" name="brand" value={formData.brand} onChange={(e) => { handleChange(e) }} />
+                                <span className="input-group-text" id="inputGroup-sizing-default">Stock</span>
+                                <input type="text" className="form-control" aria-label="Sizing example input" name="stock" value={formData.stock} onChange={(e) => { handleChange(e) }} />
                             </div>
-                            <div className="input-group pe-2 mb-5">
-                                <span className="input-group-text" id="inputGroup-sizing-default">Category</span>
-                                <input type="text" className="form-control" aria-label="Sizing example input" name="category" value={formData.category} onChange={(e) => { handleChange(e) }} />
+                            
+                            <div className="input-group mb-5">
+                                <label className="input-group-text" htmlFor="brand">Brand</label>
+                                <select className="form-select" id="brand" name="brand" value={formData.brand} onChange={(e) => { handleChange(e) }}>
+                                    {
+                                        brands.map(brand =>(
+                                            <option selected={formData.brand === brand.name} value={brand.name} >{brand.name}</option>
+                                        ))
+                                    }
+                                </select>
+                            </div>
+                            <div className="input-group mb-5">
+                                <label className="input-group-text" htmlFor="category">Category</label>
+                                <select className="form-select" id="category" name="category" value={formData.category} onChange={(e) => { handleChange(e) }}>
+                                    {
+                                        categories.map(category =>(
+                                            <option selected={formData.category === category.name} value={category.name} >{category.name}</option>
+                                        ))
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div className="col-6">

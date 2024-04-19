@@ -242,7 +242,7 @@ function ProductAdmin() {
                         <tbody>
                             {
 
-                                productList ? productList.map(product => (<SingleProductAdmin product={product} />))
+                                productList ? productList.map(product => (<SingleProductAdmin product={product} categories={categories} brands={brands}/>))
                                     :
                                     (<div className="d-flex align-items-center justify-content-center">
                                         <h2>

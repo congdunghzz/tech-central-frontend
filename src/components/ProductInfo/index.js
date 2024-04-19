@@ -63,7 +63,7 @@ function ProductInfo({ product }) {
                                 </tr>
                                 <tr className="">
                                     <td className=" fw-bold pe-3 fs-6">Stock</td>
-                                    <td>83</td>
+                                    <td>{product.stock}</td>
                                 </tr>
                             </tbody>
                         </table>

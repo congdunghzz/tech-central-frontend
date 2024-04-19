@@ -4,7 +4,7 @@ import { useState, useEffect, memo } from "react";
 
 import ProductModal from "../ProductModal";
 
-function SingleProductAdmin({product}) {
+function SingleProductAdmin({product, categories, brands}) {
     
     const [productItem, setProductItem] = useState(product)
     
@@ -36,7 +36,7 @@ function SingleProductAdmin({product}) {
 
             </tr>
             
-            <ProductModal data={productItem} setProduct = {reRenderProduct}/>
+            <ProductModal data={productItem} setProduct = {reRenderProduct} categories={categories} brands={brands}/>
         </>
     );
 

@@ -1,6 +1,6 @@
 
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 const CartItemQuantityContext = createContext();
 
@@ -8,7 +8,13 @@ function CartItemQuantityProvider({children}){
 
     const cart = JSON.parse(window.localStorage.getItem('cart'));
 
-    const [quantity, setQuantity] = useState(cart.length);
+    const [quantity, setQuantity] = useState(0);
+
+    useEffect(() => {
+        if(cart){
+            setQuantity(cart.length);
+        }
+    });
 
     const value = {
         quantity,
