@@ -13,6 +13,25 @@ function AdminOrder() {
     const [showingDetail, setShowingDetail] = useState(0);
 
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
+
+    const generatePageNumbers = () => {
+        let pages = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i);
+        }
+        return pages;
+    }
+
+    const changePageClick = (page) => {
+        if (page > totalPages || page < 1) {
+            return;
+        }
+        setCurrentPage(page);
+    }
+
     const handleShowingDetail = (orderId) => {
         if (orderId === showingDetail) {
             setShowingDetail(0);
@@ -83,10 +102,11 @@ function AdminOrder() {
     
     const handleStatusClick = (st) => {
         setStatus(st);
+        setCurrentPage(1);
 
     };
     const getAllOrders = async () => {
-        const res = await orderService.getAllOrders(status);
+        const res = await orderService.getAllOrders(status, currentPage, 10);
 
         if (res?.status === 403) {
             alert("You need to login");
@@ -101,12 +121,13 @@ function AdminOrder() {
             alert("Something went wrong on server side");
             return
         }
-        setOrderList(res.data);
+        setOrderList(res.data.content);
+        setTotalPages(res.data.totalPages);
     };
 
     useEffect(() => {
         getAllOrders();
-    }, [status]);
+    }, [status, currentPage]);
 
     return (
         <div className="row align-items-center d-flex ">
@@ -229,6 +250,32 @@ function AdminOrder() {
                         </div>
                 }
             </table>
+            <nav aria-label="Page navigation example text-center">
+                        <div className="d-flex justify-content-center w-100 my-4">
+
+                            <ul className="pagination">
+                                <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                    <a className="page-link" href="#"
+                                        onClick={() => { changePageClick(currentPage - 1) }}>Previous</a>
+                                </li>
+                                {
+                                    generatePageNumbers().map(i => (
+                                        <li key={i}
+                                            className={`page-item ${currentPage === i ? 'active' : ''}`}>
+                                            <a className="page-link" href="#"
+                                                onClick={() => { changePageClick(i) }}>{i}</a>
+                                        </li>
+                                    ))
+                                }
+
+                                <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}
+                                >
+                                    <a className="page-link" href="#"
+                                        onClick={() => { changePageClick(currentPage + 1) }}>Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
         </div>
     );
 }
