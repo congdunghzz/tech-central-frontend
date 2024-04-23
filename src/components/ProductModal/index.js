@@ -65,8 +65,8 @@ function ProductModal({ data, setProduct, categories, brands }) {
     }, [data]);
 
     useEffect(() => {
-
-    }, []);
+        setProductImages(data.productImages);
+    }, [data]);
     useEffect(() => {
 
     }, []);
@@ -106,8 +106,6 @@ function ProductModal({ data, setProduct, categories, brands }) {
     };
 
     const handleImportImagesBtn = async () => {
-        console.log('imported images' + images);
-        console.log('deleted images' + deletedImages);
 
         let formData = new FormData();
 
@@ -116,7 +114,6 @@ function ProductModal({ data, setProduct, categories, brands }) {
         })
 
         if (window.confirm('Import / delete all images selected ??')) {
-            console.log(images.length);
             if (images.length > 0) {
                 const res = (await productService.importImages(data.id, formData));
                 if (res?.message) {
@@ -126,9 +123,9 @@ function ProductModal({ data, setProduct, categories, brands }) {
                 }
                 setImages([]);
             }
+
             if (deletedImages.length > 0) {
                 const res2 = await productService.deleteImages(data.id, deletedImages);
-                console.log(res2);
                 if (res2?.message) {
                     alert(res2.message);
                 } else {
@@ -180,8 +177,9 @@ function ProductModal({ data, setProduct, categories, brands }) {
                             </div>
                             <div className="input-group pe-2 mb-5">
                                 <span className="input-group-text" id="inputGroup-sizing-default">Stock</span>
-                                <input type="text" className="form-control" aria-label="Sizing example input" name="stock" value={formData.stock} onChange={(e) => { handleChange(e) }} />
+                                <input type="number" className="form-control" aria-label="Sizing example input" name="stock" value={formData.stock} onChange={(e) => { handleChange(e) }} />
                             </div>
+                            
                             
                             <div className="input-group mb-5">
                                 <label className="input-group-text" htmlFor="brand">Brand</label>

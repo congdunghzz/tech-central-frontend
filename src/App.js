@@ -1,7 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import './App.css';
 import Home from "./pages/Home";
 import SingleProduct from './pages/SingleProduct';
@@ -16,11 +15,14 @@ import UserProfile from './pages/UserProfile';
 import UnAuthorized from './pages/UnAuthorized';
 function App() {
 
-  useEffect(() => {
 
-  });
   const authToken = window.localStorage.getItem('authToken');
   const role = window.localStorage.getItem('role');
+  const [userRole, setUserRole] = useState(role);
+  useEffect(() =>{
+    setUserRole(role);
+  })
+  
   return (
     <>
       <Routes>
@@ -35,9 +37,9 @@ function App() {
 
         <Route path="/orders" element={authToken ? (<YourOrders />) : (< UnAuthorized />)} />
         <Route path="/profile" element={authToken ? (<UserProfile />) : (< UnAuthorized />)} />
-        <Route path="/admin" element={authToken && role === 'ROLE_ADMIN' ? (<Admin />) : (< UnAuthorized />)} />
+        <Route path="/admin" element={authToken && userRole === 'ROLE_ADMIN' ? (<Admin />) : (< UnAuthorized />)} />
       </Routes>
-      
+
     </>
   );
 }

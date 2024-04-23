@@ -8,6 +8,7 @@ import "./productAdmin.css"
 export const initProduct = {
     "name": "",
     "price": '',
+    "stock": "",
     "productDetail": {
         "cpu": "",
         "ram": '',
@@ -72,6 +73,7 @@ function ProductAdmin() {
         data.append('price', formData.price);
         data.append('category', formData.category);
         data.append('brand', formData.brand);
+        data.append('stock', formData.stock);
 
         Object.keys(formData.productDetail).forEach(key => {
             data.append(`productDetail.${key}`, formData.productDetail[key]);
@@ -242,7 +244,7 @@ function ProductAdmin() {
                         <tbody>
                             {
 
-                                productList ? productList.map(product => (<SingleProductAdmin product={product} categories={categories} brands={brands}/>))
+                                productList ? productList.map(product => (<SingleProductAdmin product={product} categories={categories} brands={brands} />))
                                     :
                                     (<div className="d-flex align-items-center justify-content-center">
                                         <h2>
@@ -304,6 +306,10 @@ function ProductAdmin() {
                                 <div className="input-group pe-2 mb-5">
                                     <span className="input-group-text" id="inputGroup-sizing-default">Price</span>
                                     <input type="number" className="form-control" aria-label="Sizing example input" name="price" value={formData.price} onChange={(e) => { handleChange(e) }} />
+                                </div>
+                                <div className="input-group pe-2 mb-5">
+                                    <span className="input-group-text" id="inputGroup-sizing-default">Stock</span>
+                                    <input type="number" className="form-control" aria-label="Sizing example input" name="stock" value={formData.stock} onChange={(e) => { handleChange(e) }} />
                                 </div>
                                 <div className="input-group pe-2 mb-5">
                                     <span className="input-group-text" id="inputGroup-sizing-default">Brand</span>

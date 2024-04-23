@@ -48,8 +48,8 @@ export async function getProductById(id) {
 
 export async function postNewProduct(formData) {
     try {
-
-        return await axios.post(`${ApiUrl}/product`, formData,
+        console.log( formData.price + ", "  + formData.stock);
+        const res = await axios.post(`${ApiUrl}/product`, formData,
             {
                 headers: { 
                     'Content-Type': `multipart/form-data` ,
@@ -57,6 +57,7 @@ export async function postNewProduct(formData) {
                 }
             }
         );
+        return res;
     } catch (error) {
         if (error.response.data.statusCode >= 400) {
             return {
@@ -126,11 +127,12 @@ export async function importImages(productId, formData) {
 
 }
 export async function deleteImages(productId, images) {
-    console.log(images);
     try {
-        return await axios.delete(`${ApiUrl}/product/${productId}/image`, {data: images} , {
+        const res = await axios.put(`${ApiUrl}/product/${productId}/image`, images , {
             headers: { 'Content-Type': 'application/json', ...authHeader()},
         });
+        console.log(res);
+        return res;
     } catch (error) {
         if (error.response.data.statusCode >= 400) {
             return {
