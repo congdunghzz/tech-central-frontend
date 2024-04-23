@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import PriceSection from "../../components/PriceSection";
 import Features from "../../components/Features";
@@ -7,34 +8,34 @@ import ProductList from "../../components/ProductList";
 import Banner from "../../components/Banner";
 import Categories from "../../components/Categories";
 import { getCategories } from "../../services/categoryService";
-import { getProducts, getNewProduct } from "../../services/productService";
+import {getNewProduct } from "../../services/productService";
 
-function Home () {
-    const [ categories, setCategories] = useState([]);
+function Home() {
+    const [categories, setCategories] = useState([]);
     const [productList, setProductList] = useState([]);
-
+    const navigate = useNavigate();
     const getAllCategories = async () => {
-        const {data} = await getCategories();
+        const { data } = await getCategories();
         setCategories(data);
     };
 
-    const getProductList = async () => {
-        const { data } = await getProducts();
-        setProductList(data.content);
-    }
+    const handleSeeMoreClick = () => {
+        navigate("/product");
+    };
+    
     const getNew = async () => {
         const { data } = await getNewProduct(8);
         setProductList(data);
     }
-    useEffect( () => {
+    useEffect(() => {
         getAllCategories();
     }, []);
 
-    useEffect( () => {
+    useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }, []);
 
-    useEffect( () => {
+    useEffect(() => {
         getNew();
     }, []);
 
@@ -43,16 +44,20 @@ function Home () {
 
     return (
         <>
-            <Header/>
-            <PriceSection/>
-            <Categories categories={categories}/>
-            <Features/>
-            <ProductList title="Trending Products" showingType={'col-xxl-3  col-lg-4 col-md-6'} products={productList}/>
-            <Banner/>
-            <ProductList title = "New Arrivals" showingType={'col-xxl-3  col-lg-4 col-md-6'} products={productList}/>
-            <Footer/>
+            <Header />
+            <PriceSection />
+            <Categories categories={categories} />
+            <Features />
+            {/* <ProductList title="Trending Products" showingType={'col-xxl-3  col-lg-4 col-md-6'} products={productList}/> */}
+            <ProductList title="New Arrivals" showingType={'col-xxl-3  col-lg-4 col-md-6'} products={productList} />
+            <div class="d-grid gap-2 col-2 mx-auto mb-5">
+                <button type="button" class="btn btn-outline-primary p-2" onClick={handleSeeMoreClick}>See more</button>
+            </div>
+
+            <Banner />
+            <Footer />
         </>
-        
+
     )
 
 }
